@@ -7,6 +7,8 @@ import DashboardBuyer from './pages/DashboardBuyer';
 import Makanan from './pages/Makanan';
 import Minuman from './pages/Minuman';
 import Chart from './pages/Chart';
+import Invoice from './pages/Invoice';
+import HistoricalOrderBuyer from './pages/HistoricalOrderBuyer';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path ="/Makanan" element={<Makanan/>}/>
         <Route path ="/Minuman" element={<Minuman/>}/>
         <Route path ="/Chart" element={<Chart/>}/>
+        <Route path ="/Invoice" element={<Invoice/>}/>
+        <Route path ="/OrderHistory" element={<HistoricalOrderBuyer/>}/>
       </Routes>
       </BrowserRouter>
     </div>
