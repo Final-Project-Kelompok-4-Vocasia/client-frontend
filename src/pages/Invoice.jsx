@@ -1,4 +1,5 @@
 
+import BackButton from "../components/BackButton";
 import TableInvoice from "../components/TableInvoice";
 
 function Invoice (){
@@ -11,9 +12,9 @@ function Invoice (){
   const formattedUpdatedDate = `${updatedDay}/${updatedMonth}/${updatedYear}`;
 
     return (
-        <div>
+        <div class = "border-solid border-2 border-sky-500">
             
-            <h1 class="text-5xl font-extrabold dark:text-white p-10">Flowbite<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">This is secondary text</small></h1>
+            <h1 class="text-5xl font-extrabold dark:text-white p-10"><BackButton></BackButton>Flowbite<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">This is secondary text</small></h1>
             <h3>Name: {name} </h3>
             <h3>Tanggal Order: {formattedUpdatedDate} </h3>
 

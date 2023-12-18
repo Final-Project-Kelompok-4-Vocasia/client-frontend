@@ -20,6 +20,9 @@ function TableChart () {
                     Price
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Sub Total
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -42,6 +45,9 @@ function TableChart () {
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                     $599
                 </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    $10
+                </td>
                 <td class="px-6 py-4">
                     <a href="/" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
                 </td>
@@ -63,6 +69,9 @@ function TableChart () {
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                     $2499
                 </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    $10
+                </td>
                 <td class="px-6 py-4">
                     <a href="/" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
                 </td>
@@ -82,7 +91,10 @@ function TableChart () {
                     </div>
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $999
+                    $10
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    $10
                 </td>
                 <td class="px-6 py-4">
                     <a href="/" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
@@ -90,6 +102,9 @@ function TableChart () {
             </tr>
 
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    {/* blank */}
+                </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                     {/* blank */}
                 </td>
