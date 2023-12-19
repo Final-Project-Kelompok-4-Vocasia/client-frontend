@@ -1,10 +1,28 @@
-function Card() {
-  return (
-    <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="/">
-        <img class="p-8 rounded-t-lg" src="/docs/images/products/apple-watch.png" alt="product image" />
-      </a>
-      <div class="px-5 pb-5">
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
+function Card () {
+
+    const notify = () => toast.success("Menu berhasil ditambahkan Chart!",{
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    return (
+        
+
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="/">
+        <img class="p-8 rounded-t-lg" src="" alt="product image" />
+    </a>
+    <div class="px-5 pb-5">
         <a href="/">
           <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport

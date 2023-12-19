@@ -32,7 +32,9 @@ function IsAuthenticate() {
   return <Outlet />;
 }
 
+
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>

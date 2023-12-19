@@ -1,7 +1,9 @@
+import BackButton from "../components/BackButton";
+
 function HistoricalOrderBuyer () {
     return(
-        <div>
-        <h1 class="text-5xl font-extrabold dark:text-white">Order History</h1>  
+        <div class="p-5">
+        <h1 class="text-5xl font-extrabold dark:text-white"><BackButton></BackButton>Order History</h1>  
 
         
 
