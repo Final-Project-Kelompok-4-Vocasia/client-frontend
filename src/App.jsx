@@ -3,7 +3,7 @@ import "./App.css";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import DashboardBuyer from "./pages/DashboardBuyer";
+// import DashboardBuyer from "./pages/DashboardBuyer";
 import Makanan from "./pages/Makanan";
 import Minuman from "./pages/Minuman";
 import Chart from "./pages/Chart";
@@ -32,9 +32,7 @@ function IsAuthenticate() {
   return <Outlet />;
 }
 
-
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -43,7 +41,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route path="/DashboardBuyer" element={<DashboardBuyer />} />
+          {/* <Route path="/DashboardBuyer" element={<DashboardBuyer />} /> */}
           <Route path="/Makanan" element={<Makanan />} />
           <Route path="/Minuman" element={<Minuman />} />
           <Route path="/Chart" element={<Chart />} />
