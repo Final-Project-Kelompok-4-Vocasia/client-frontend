@@ -1,71 +1,177 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+// import FormRegister from "../components/FormRegister";
+import { register } from "../utils/network";
+import { useState } from "react";
+import { Label, TextInput } from "flowbite-react";
 
-function Register () {
+function Register() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nama, setNama] = useState("");
+  const [telepon, setTelepon] = useState("");
+  const [alamat, setAlamat] = useState("");
 
-    const navigate= useNavigate();
+  function onSubmitHandler(event) {
+    event.preventDefault();
 
-    const navigateDashboardBuyer = (e) => {
-      e.preventDefault();
-      navigate('/Makanan');
-    };
+    register({ username, email, password, nama, telepon, alamat, isSeller: false }).then((response) => {
+      console.log(response);
 
-    return (
-        <div className=" my-16 flex items-center justify-center">
-        <form className="max-w-screen-lg w-6/12  rounded-lg border-solid border-4 border-orange-900 m-8 p-10">
-          <div className="mb-6">
-            <h1 className="mb-4 font-bold text-3xl">Register</h1>
-            <label className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            <input
-              type="email"
-              id="email"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name@flowbite.com"
+      if (!response.error) {
+        alert("Berhasil! Silahkan login");
+        console.log(`Berhasil membuat akun baru! email: ${email}, password: ${password} `);
+        navigate("/login");
+      } else {
+        alert("Gagal membuat akun!");
+      }
+    });
+  }
+
+  const onLoginHandler = (event) => {
+    event.preventDefault();
+    navigate("/login");
+  };
+
+  return (
+    // <div>
+    //   <FormRegister></FormRegister>
+    // </div>
+
+    <div>
+      <div className="container min-h-screen flex justify-center bg-amber-100">
+        <form
+          onSubmit={(event) => {
+            console.log("Berhasil disubmit!");
+            onSubmitHandler(event);
+          }}
+          className="bg-violet-300 shadow-lg rounded-lg flex w-full max-w-md h-fit px-8 py-6 flex-col gap-4 mt-14">
+          <div>
+            <h1 className="text-2xl font-bold text-center text-slate-700 mb-7">Register User</h1>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Username:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setUsername(value);
+              }}
+              type="text"
+              // icon={FaUserCircle}
               required
+              shadow
             />
           </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
-            <input
+
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Email:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setEmail(value);
+              }}
+              type="text"
+              // icon={FaUserCircle}
+              required
+              shadow
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Password:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setPassword(value);
+              }}
               type="password"
-              id="password"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              // icon={RiLockPasswordFill}
               required
+              shadow
             />
           </div>
-          <div className="mb-6">
-            <label for="username" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Username</label>
-            <input 
-            type="text" 
-            id="username" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <div className="mb-6">
-            <label for="telepon" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">No.Telp</label>
-            <input 
-            type="tel" 
-            id="telepon" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <div className="mb-6">
-            <label for="address" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-            <input 
-            type="text" 
-            id="address" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <button
-            type="submit"
-            className="bg-orange-900 text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
 
-            onClick={navigateDashboardBuyer}
-          >
-            Submit
-          </button>
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Nama:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setNama(value);
+              }}
+              type="text"
+              // icon={FaUserCircle}
+              required
+              shadow
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Nomor Telepon:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setTelepon(value);
+              }}
+              type="text"
+              // icon={FaUserCircle}
+              required
+              shadow
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Alamat:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setAlamat(value);
+              }}
+              type="text"
+              // icon={FaUserCircle}
+              required
+              shadow
+            />
+          </div>
+
+          {/* Submit Button */}
+          {username && email && password && nama && telepon && alamat ? (
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-lg">
+              Submit
+            </button>
+          ) : (
+            <button type="submit" disabled className="bg-red-300 text-white font-semibold px-3 py-1.5 rounded-lg">
+              Submit
+            </button>
+          )}
+
+          {/* Navigate Login */}
+          <div>
+            <Label className="text-sm">Punya akun?</Label>
+            <button onClick={onLoginHandler} className="text-sm pl-1">
+              <u>Login</u>
+            </button>
+          </div>
         </form>
       </div>
-    );
-} 
+    </div>
+  );
+}
 
 export default Register;
