@@ -1,21 +1,15 @@
-import Card from "../components/Card";
+// pages/Minuman.js
 import Navbar from "../components/Navbar";
+import KategoriMenu from "../components/kategoriMenu";
+import { menu } from "../utils/local";
 
-function Minuman () {
-    return(
-        <div>
-        <Navbar></Navbar>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-        <div class="grid gap-4 grid-cols-3 grid-rows-3 p-10" >
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-        </div>
-        </div>
-      </div>
-    );
+function Minuman() {
+  return (
+    <div>
+      <Navbar></Navbar>
+      <KategoriMenu kategori="minuman" menuData={menu} />
+    </div>
+  );
 }
+
 export default Minuman;
