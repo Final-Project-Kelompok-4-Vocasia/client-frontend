@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import Menu from '../components/Menu';
-import AddForm from '../components/AddForm';
-import EditForm from '../components/EditForm';
-import Sidebar from '../components/Sidebar';
-import { getProduct, handleDeleteProduct } from '../utils/local';
-import AlertModal from '../components/Alerts';
+import React, { useState, useEffect } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import Menu from "../components/Menu";
+import AddForm from "../components/AddForm";
+import EditForm from "../components/EditForm";
+import Sidebar from "../components/Sidebar";
+import { getProduct, handleDeleteProduct } from "../utils/local";
+import AlertModal from "../components/Alerts";
+import Header from "../components/Header";
 
 function Home() {
   const [product, setProduct] = useState([]);
@@ -13,7 +14,6 @@ function Home() {
   const [isFormAdd, setIsFormAdd] = useState(false);
   const [isFormEdit, setIsFormEdit] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
 
   useEffect(() => {
     const data = getProduct();
@@ -27,7 +27,7 @@ function Home() {
   const openModal = () => {
     setIsModalOpen(true);
   };
-  
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -56,21 +56,18 @@ function Home() {
 
   const filteredProduct = product.filter((item) => {
     const inputTextSearch = search.toLowerCase();
-    const searchProduct =
-      item.menu.toLowerCase().includes(inputTextSearch) ||
-      item.category.toLowerCase().includes(inputTextSearch);
+    const searchProduct = item.menu.toLowerCase().includes(inputTextSearch) || item.category.toLowerCase().includes(inputTextSearch);
 
     return searchProduct;
   });
 
   return (
     <div>
-      <div>
+      <Header />
+      <div className="flex container mx-auto">
         <Sidebar />
-      </div>
-      <div className="flex-grow md:pl-60 pr-11 py-28 overflow-x-auto">
-        <div className="container mx-auto px-12 pb-12 pt-1 bg-white rounded-lg">
-          <h1 className="text-2xl font-semibold text-left mt-12">Dashboard</h1>
+        <div className="container mx-auto px-5 py-5 bg-white rounded-lg">
+          <h1 className="text-2xl font-semibold text-left">Dashboard</h1>
           <form className="flex items-center pt-5">
             <div className="relative w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -89,8 +86,7 @@ function Home() {
             <button
               type="button"
               onClick={openFormAdd}
-              className="inline-flex items-center justify-center w-32 py-3 px-3 ms-4 text-sm font-normal text-stone-900 bg-stone-300 rounded-lg border hover:bg-stone-400"
-            >
+              className="inline-flex items-center justify-center w-32 py-3 px-3 ms-4 text-sm font-normal text-stone-900 bg-stone-300 rounded-lg border hover:bg-stone-400">
               Add Product
             </button>
           </form>
@@ -127,7 +123,7 @@ function Home() {
                     img={item.img}
                     editbutton="Edit"
                     deletebutton="Delete"
-                    onDelete={onDeleteHandler} 
+                    onDelete={onDeleteHandler}
                     onEdit={openFormEdit}
                   />
                 ))}
@@ -135,11 +131,11 @@ function Home() {
             </table>
           </div>
         </div>
-      </div>
 
-      {isFormAdd && <AddForm onClose={closeFormAdd} />}
-      {isFormEdit && <EditForm onClose={closeFormEdit} />}
-      {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />}
+        {isFormAdd && <AddForm onClose={closeFormAdd} />}
+        {isFormEdit && <EditForm onClose={closeFormEdit} />}
+        {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />}
+      </div>
     </div>
   );
 }
