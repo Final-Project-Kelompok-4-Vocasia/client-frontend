@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import { AiOutlineLogout, AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
+import logo from "../assets/Cafètaria (3).png"
+import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 
 const Header = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
-  const [isAsideOpen, setAsideOpen] = useState(true);
 
   const toggleProfile = () => {
     setProfileOpen(!isProfileOpen);
   };
 
-  const toggleAside = () => {
-    setAsideOpen(!isAsideOpen);
-  };
 
   return (
-    <header className="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
+    <header className="flex w-full items-center justify-between border-b-2 border-gray-200 bg-orange-800 p-2">
       <div className="flex items-center space-x-2">
-        <button type="button" className="text-3xl" onClick={toggleAside}>
-          <AiOutlineMenu />
-        </button>
-        <div>Cafètaria</div>
+        <div className="w-36 pb-1">
+          <img src={logo} alt="logo" />
+        </div>
+
       </div>
 
       <div>

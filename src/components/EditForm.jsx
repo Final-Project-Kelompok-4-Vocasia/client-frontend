@@ -84,7 +84,7 @@ const EditForm = ({ onClose }) => {
             type="submit"
             className="block mx-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
           >
-            Submit
+            Save Changes
           </button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import HistoryOrder from '../components/History Order';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { getHistory } from '../utils/local';
 
@@ -35,16 +35,12 @@ function OrderHistory() {
   });
 
   return (
-    <div>
-      {/* <div>
-      <Header />
-    </div> */}
       <div>
+      <Header />
+      <div className="flex bg-gray-100">
         <Sidebar />
-      </div>
-      <div className="flex-grow md:pl-24 pr-11 py-28 bg-gray-100 overflow-x-auto">
-      <div class="container mx-auto px-12 pb-12 pt-1 bg-white rounded-lg">
-        <h1 className="text-2xl font-semibold text-left mt-12">Order History</h1>
+        <div className="container justify-center mx-5 pl-14 pr-14 py-10 bg-grey-100">
+          <h1 className="text-2xl font-semibold text-left">Order History</h1>
         <form className="flex items-center pt-5">
           <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -108,3 +104,5 @@ function OrderHistory() {
 }
 
 export default OrderHistory;
+
+
