@@ -3,13 +3,14 @@ import "./App.css";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-// import DashboardBuyer from "./pages/DashboardBuyer";
+import Dashboard from "./pages/Dashboard";
 import Makanan from "./pages/Makanan";
 import Minuman from "./pages/Minuman";
 import Chart from "./pages/Chart";
 import Invoice from "./pages/Invoice";
 import HistoricalOrderBuyer from "./pages/HistoricalOrderBuyer";
 import { getAccessToken, getRoleUser } from "./utils/network";
+import { ToastContainer } from "react-toastify";
 
 function IsAuthenticate() {
   let auth = getAccessToken();
@@ -35,9 +36,21 @@ function IsAuthenticate() {
 function App() {
   return (
     <div className="App">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <BrowserRouter>
         <Routes>
           {/* Universal Page */}
+          <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
