@@ -7,7 +7,6 @@ import { getProduct, handleDeleteProduct } from "../utils/local";
 import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
 
-
 function Home() {
   const [product, setProduct] = useState([]);
   const [search, setSearch] = useState("");
@@ -31,12 +30,12 @@ function Home() {
     setIsModalOpen(false);
   };
 
-  const onDeleteHandler = (menu) => {
-    handleDeleteProduct(menu);
+  const onDeleteHandler = (menuId) => {
+    handleDeleteProduct(menuId);
     setProduct(getProduct());
-    setIsModalOpen(true);
-  }; 
-  
+    // setIsModalOpen(true);
+  };
+
   const openFormEdit = () => {
     setIsFormEdit(true);
   };
@@ -57,7 +56,7 @@ function Home() {
       <Header />
       <div className="flex bg-gray-100">
         <Sidebar />
-        <div className="container justify-center mx-5 pl-14 pr-14 py-10 bg-grey-100">
+        <div className="container justify-center mx-5 pr-14 py-10 bg-grey-100">
           <h1 className="text-2xl font-semibold text-left">Dashboard</h1>
           <form className="flex items-center pt-5">
             <div className="relative w-full">
@@ -108,7 +107,7 @@ function Home() {
                     img={item.img}
                     editbutton="Edit"
                     deletebutton="Delete"
-                    onDelete={onDeleteHandler}
+                    onDelete={() => onDeleteHandler(item.id)}
                     onEdit={openFormEdit}
                   />
                 ))}

@@ -1,18 +1,21 @@
 //<-- product -->
 let array_product = [
   {
+    id: 1,
     menu: "Matcha",
     category: "Minuman",
     price: "Rp. 17.000",
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 2,
     menu: "Roti",
     category: "Makanan",
     price: "Rp. 17.000",
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 3,
     menu: "Kentang",
     category: "Makanan",
     price: "Rp. 17.000",
@@ -31,24 +34,28 @@ let array_product = [
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 4,
     menu: "Kentang",
     category: "Makanan",
     price: "Rp. 17.000",
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 5,
     menu: "Matcha",
     category: "Minuman",
     price: "Rp. 17.000",
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 6,
     menu: "Roti",
     category: "Makanan",
     price: "Rp. 17.000",
     img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
+    id: 7,
     menu: "Kentang",
     category: "Makanan",
     price: "Rp. 17.000",
@@ -168,17 +175,13 @@ function addProduct(newProduct) {
   array_product = [...array_product, newProduct];
 }
 
-
 function getProduct() {
   return array_product;
 }
 
-// function handleDeleteProduct(deleted_index) {
-//   array_product = array_product.filter((menu, index) => index !== deleted_index);
-// }
-
-function handleDeleteProduct(menu) {
-  array_product = array_product.filter((item) => item.menu !== menu);
+//Hapus array product berdasarkan IDnya
+function handleDeleteProduct(menuId) {
+  array_product = array_product.filter((item) => item.id !== menuId);
 }
 
 function getHistory() {

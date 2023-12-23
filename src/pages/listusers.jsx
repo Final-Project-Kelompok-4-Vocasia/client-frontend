@@ -9,7 +9,7 @@ import Users from "../components/Users";
 function Home() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false) ;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const data = getUsers();
@@ -34,7 +34,6 @@ function Home() {
   //   setIsModalOpen(true);
   // };
 
-
   const filteredUser = users.filter((user) => {
     const inputTextSearch = search.toLowerCase();
     const searchUsers = user.username.toLowerCase().includes(inputTextSearch) || user.nama.toLowerCase().includes(inputTextSearch);
@@ -47,7 +46,7 @@ function Home() {
       <Header />
       <div className="flex bg-gray-100">
         <Sidebar />
-        <div className="container justify-center mx-5 pl-14 pr-14 py-10 bg-grey-100">
+        <div className="container justify-center mx-5 pl-30 pr-14 py-10 bg-grey-100">
           <h1 className="text-2xl font-semibold text-left">List User</h1>
           <form className="flex items-center pt-5">
             <div className="relative w-full">
@@ -93,15 +92,14 @@ function Home() {
               <tbody>
                 {filteredUser.map((user) => (
                   <Users
-                  key={user.username}
-                  username={user.username}
-                  email={user.email}
-                  nama={user.nama}
-                  nomertelpon={user.nomertelpon}
-                  alamat={user.alamat}
-                  deletebutton="Delete"
-                  
-                />
+                    key={user.username}
+                    username={user.username}
+                    email={user.email}
+                    nama={user.nama}
+                    nomertelpon={user.nomertelpon}
+                    alamat={user.alamat}
+                    deletebutton="Delete"
+                  />
                 ))}
               </tbody>
             </table>
