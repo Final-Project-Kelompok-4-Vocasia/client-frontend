@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { login, putAccessToken, putRoleUser } from "../utils/network";
 import { Label, TextInput } from "flowbite-react";
+import background from "../assets/bg-caffe.jpg";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,14 +26,14 @@ function Login() {
 
         //Routing Role untuk Seller dan Buyer
         if (response?.data?.isSeller) {
-          alert(`Selamat datang, Seller!`);
+          toast.success("Selamat datang, Seller!");
           navigate("/dashboard/seller"); //Route testing
         } else {
-          alert(`Selamat datang, Buyer!`);
+          toast.success("Selamat datang, Buyer!");
           navigate("/dashboard/buyer"); //Route testing
         }
       } else {
-        alert("Gagal: Salah Email/Password!");
+        toast.error("Gagal: Salah Email/Password!");
       }
     });
   }
@@ -40,19 +44,21 @@ function Login() {
   }
 
   return (
-    // <div>
-    //   <FormLogin></FormLogin>
-    // </div>
-
     <div>
-      <div className="container min-h-screen flex justify-center bg-amber-100">
+      <div
+        className="container min-h-screen flex justify-center"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}>
         <form
           onSubmit={(event) => {
             console.log("Berhasil disubmit!");
             onSubmitHandler(event);
           }}
-          className="bg-violet-300 shadow-lg rounded-lg flex w-full max-w-md h-fit px-8 py-6 flex-col gap-4 mt-14">
-          <div>
+          className="bg-orange-200 shadow-lg rounded-lg flex w-full max-w-md h-fit px-8 py-6 flex-col gap-4 mt-14 border-white border-8">
+          <div className="rounded-md">
             <h1 className="text-2xl font-bold text-center  text-slate-700 mb-7">Login User</h1>
             <div className="mb-2 block">
               <Label className="text-base text-slate-700">Email:</Label>
@@ -64,7 +70,7 @@ function Login() {
                 setEmail(value);
               }}
               type="text"
-              //   icon={FaUserCircle}
+              icon={FaUserCircle}
               required
               shadow
             />
@@ -82,7 +88,7 @@ function Login() {
                   setPassword(value);
                 }}
                 type="password"
-                // icon={RiLockPasswordFill}
+                icon={RiLockPasswordFill}
                 required
                 shadow
               />
