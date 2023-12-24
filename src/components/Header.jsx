@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import logo from "../assets/Cafètaria (3).png";
 import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
+import { deleteAccessToken, deleteRoleUser } from "../utils/network";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleProfile = () => {
     setProfileOpen(!isProfileOpen);
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    deleteAccessToken();
+    deleteRoleUser();
+
+    toast.success("Berhasil logout!");
+    navigate("/");
   };
 
   return (
@@ -25,10 +38,10 @@ const Header = () => {
         {isProfileOpen && (
           <div className="absolute right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md border border-gray-200 bg-white shadow-md">
             <div className="flex flex-col space-y-3 p-2 items-start">
-              <button className="transition hover:text-blue-600">
+              {/* <button className="transition hover:text-blue-600">
                 <AiOutlineUser className="inline-block mr-2" /> My Profile
-              </button>
-              <button className="transition hover:text-blue-600">
+              </button> */}
+              <button className="transition hover:text-blue-600" onClick={handleLogout}>
                 <AiOutlineLogout className="inline-block mr-2" /> Log Out
               </button>
             </div>

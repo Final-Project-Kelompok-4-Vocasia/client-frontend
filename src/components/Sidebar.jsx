@@ -6,7 +6,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleDashboard = () => {
-    navigate("/home");
+    navigate("/dashboard/seller");
   };
 
   const handleOrder = () => {

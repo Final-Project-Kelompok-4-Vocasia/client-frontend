@@ -5,7 +5,7 @@ import { Label, TextInput } from "flowbite-react";
 import background from "../assets/bg-caffe.jpg";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -30,7 +30,8 @@ function Login() {
           navigate("/dashboard/seller"); //Route testing
         } else {
           toast.success("Selamat datang, Buyer!");
-          navigate("/dashboard/buyer"); //Route testing
+          // navigate("/dashboard/buyer"); //Route testing
+          navigate("/Makanan");
         }
       } else {
         toast.error("Gagal: Salah Email/Password!");

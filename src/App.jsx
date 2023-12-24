@@ -1,11 +1,11 @@
-import './App.css';
+import "./App.css";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AddProduct from './pages/addproduct';
-import Home from './pages/homepage';
-import ListUsers from './pages/listusers';
-import OrderHistory from './pages/orderhistory';
-import { Toaster } from 'react-hot-toast';
+import AddProduct from "./pages/addproduct";
+import Home from "./pages/homepage";
+import ListUsers from "./pages/listusers";
+import OrderHistory from "./pages/orderhistory";
+import { Toaster } from "react-hot-toast";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -23,18 +23,19 @@ function IsAuthenticate() {
   let isSeller = getRoleUser();
 
   if (!auth) {
-    return <Navigate to="/login" />;
+    //Navigasi ke halaman paling awal
+    return <Navigate to="/" />;
   }
 
   //Seller
-  if (auth && isSeller) {
+  if (auth && isSeller === true) {
     return <Navigate to="/dashboard/seller" />;
   }
 
-  //Buyer
-  if (auth && !isSeller) {
-    return <Navigate to="/home" />;
-  }
+  // //Buyer
+  // if (auth && !isSeller) {
+  //   return <Navigate to="/Makanan" />;
+  // }
 
   return <Outlet />;
 }
@@ -42,10 +43,7 @@ function IsAuthenticate() {
 function App() {
   return (
     <div className="App">
-      <Toaster 
-         position="bottom-right"
-         reverseOrder={false}
-         />
+      <Toaster position="top-center" reverseOrder={false} />
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -64,18 +62,33 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Buyer */}
-          <Route path="/Makanan" element={<Makanan />} />
+          <Route element={<IsAuthenticate />}>
+            {/* Buyer */}
+            <Route path="/Makanan" element={<Makanan />} />
+            <Route path="/Minuman" element={<Minuman />} />
+            <Route path="/Chart" element={<Chart />} />
+            <Route path="/Invoice" element={<Invoice />} />
+            <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} />
+
+            {/* Seller */}
+            <Route path="/dashboard/seller" element={<Home />} />
+            <Route path="/users" element={<ListUsers />} />
+            <Route path="/add" element={<AddProduct />} />
+            <Route path="/history" element={<OrderHistory />} />
+          </Route>
+
+          {/* Buyer Page */}
+          {/* <Route path="/Makanan" element={<Makanan />} />
           <Route path="/Minuman" element={<Minuman />} />
           <Route path="/Chart" element={<Chart />} />
           <Route path="/Invoice" element={<Invoice />} />
-          <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} />
+          <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} /> */}
 
-          {/* Seller */}
-          <Route path="/home" element={<Home />} />
+          {/* Seller Page */}
+          {/* <Route path="/dashboard/seller" element={<Home />} />
           <Route path="/users" element={<ListUsers />} />
           <Route path="/add" element={<AddProduct />} />
-          <Route path="/history" element={<OrderHistory />} />    
+          <Route path="/history" element={<OrderHistory />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

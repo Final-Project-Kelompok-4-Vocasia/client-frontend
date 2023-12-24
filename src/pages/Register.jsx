@@ -9,6 +9,7 @@ import { GoHomeFill } from "react-icons/go";
 import { BiSolidContact } from "react-icons/bi";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
+import { toast } from "react-hot-toast";
 
 function Register() {
   const navigate = useNavigate();
@@ -26,11 +27,11 @@ function Register() {
       console.log(response);
 
       if (!response.error) {
-        alert("Berhasil! Silahkan login");
+        toast.success("Berhasil! Silahkan login");
         console.log(`Berhasil membuat akun baru! email: ${email}, password: ${password} `);
         navigate("/login");
       } else {
-        alert("Gagal membuat akun!");
+        toast.error("Gagal membuat akun!");
       }
     });
   }
