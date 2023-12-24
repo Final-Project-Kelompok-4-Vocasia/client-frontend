@@ -75,4 +75,42 @@ async function register({ username, email, password, nama, telepon, alamat, isSe
   return { error: false, code: response.status };
 }
 
-export { getAccessToken, putAccessToken, fetchWithToken, deleteAccessToken, login, register, getRoleUser, putRoleUser, deleteRoleUser };
+//CRUD Menu
+async function getMenu() {
+  const response = await fetchWithToken(`${BASE_URL}/menu`);
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
+}
+
+async function deleteMenu(id) {
+  const response = await fetchWithToken(`${BASE_URL}/menu/deleteMenu/${id}`, {
+    method: "DELETE",
+  });
+
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
+}
+
+export {
+  getAccessToken,
+  putAccessToken,
+  fetchWithToken,
+  deleteAccessToken,
+  login,
+  register,
+  getRoleUser,
+  putRoleUser,
+  deleteRoleUser,
+  getMenu,
+  deleteMenu,
+};

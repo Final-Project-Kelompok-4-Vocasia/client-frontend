@@ -1,5 +1,11 @@
+import './App.css';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddProduct from './pages/addproduct';
+import Home from './pages/homepage';
+import ListUsers from './pages/listusers';
+import OrderHistory from './pages/orderhistory';
+import { Toaster } from 'react-hot-toast';
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -36,6 +42,10 @@ function IsAuthenticate() {
 function App() {
   return (
     <div className="App">
+      <Toaster 
+         position="bottom-right"
+         reverseOrder={false}
+         />
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -54,12 +64,18 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* <Route path="/DashboardBuyer" element={<DashboardBuyer />} /> */}
+          {/* Buyer */}
           <Route path="/Makanan" element={<Makanan />} />
           <Route path="/Minuman" element={<Minuman />} />
           <Route path="/Chart" element={<Chart />} />
           <Route path="/Invoice" element={<Invoice />} />
           <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} />
+
+          {/* Seller */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/users" element={<ListUsers />} />
+          <Route path="/add" element={<AddProduct />} />
+          <Route path="/history" element={<OrderHistory />} />    
         </Routes>
       </BrowserRouter>
     </div>
