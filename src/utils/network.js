@@ -56,13 +56,29 @@ async function login({ email, password }) {
   return { error: false, code: response.status, data: responseJson.data };
 }
 
-async function register({ username, email, password, nama, telepon, alamat, isSeller }) {
+async function register({
+  username,
+  email,
+  password,
+  nama,
+  telepon,
+  alamat,
+  isSeller,
+}) {
   const response = await fetch(`${BASE_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email, password, nama, noTelepon: telepon, alamat, isSeller }),
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+      nama,
+      noTelepon: telepon,
+      alamat,
+      isSeller,
+    }),
   });
 
   const responseJson = await response.json();
@@ -96,7 +112,7 @@ async function getMenu() {
     return { error: true, code: response.status, data: null };
   }
 
-  return { error: false, code: response.status, data: responseJson.data };
+  return { error: false, code: response.status, data: responseJson };
 }
 
 async function deleteMenu(id) {

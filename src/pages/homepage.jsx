@@ -77,14 +77,11 @@ function Home() {
 
   useEffect(() => {
     getMenu()
-      .then((result) => {
-        const data = result.data;
-        console.log("Data BE", data);
+      .then(({ data }) => {
         setMenu(data);
-        console.log("Test menu", menu);
       })
-      .catch((error) => {
-        console.error("Error:", error);
+      .catch((err) => {
+        alert(JSON.stringify(err, null, 2));
       });
   }, []);
 
@@ -96,11 +93,12 @@ function Home() {
     setIsFormEdit(false);
   };
 
-  const filteredMenu = menu.filter((item) => {
+  const filteredMenu = menu?.filter((item) => {
     const inputTextSearch = search.toLowerCase();
-    // const searchProduct = item.menu.toLowerCase().includes(inputTextSearch) || item.category.toLowerCase().includes(inputTextSearch);
     const searchProduct =
-      (item.menu && item.menu.toLowerCase().includes(inputTextSearch)) || (item.category && item.category.toLowerCase().includes(inputTextSearch));
+      (item.namaMenu &&
+        item.namaMenu.toLowerCase().includes(inputTextSearch)) ||
+      (item.kategori && item.kategori.toLowerCase().includes(inputTextSearch));
 
     return searchProduct;
   });
