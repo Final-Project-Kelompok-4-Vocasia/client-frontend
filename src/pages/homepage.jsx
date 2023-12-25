@@ -93,29 +93,29 @@ function Home() {
                   onHandleSearch(event);
                 }}
                 type="text"
-                className="bg-stone-300 text-stone-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-3 pl-10 dark:border-stone-200 "
+                className="bg-blue-100 text-stone-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 pl-10 dark:border-stone-200 "
                 placeholder="Search Menu..."
               />
             </div>
           </form>
 
           <div className="relative overflow-x-auto pt-10 w-full">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-50 dark:text-gray-50">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-50 dark:text-gray-50 border-2">
               <thead className="text-xs text-stone-900 bg-stone-400 dark:bg-stone-400 dark:text-stone-900">
                 <tr>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-6 py-3 border-r-2  text-center">
                     Menu
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-6 py-3 border-r-2 text-center">
                     Category
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-6 py-3 border-r-2 text-center">
                     Price
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-6 py-3 border-r-2 text-center">
                     Img
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-6 py-3 border-r-2 text-center">
                     Action
                   </th>
                 </tr>

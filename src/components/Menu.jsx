@@ -4,13 +4,13 @@ function Menu(props) {
   const { id, namaMenu, kategori, harga, image, editbutton, deletebutton, onDelete, onEdit } = props;
 
   return (
-    <tr className="bg-stone-300 dark:bg-stone-300">
-      <th scope="row" class="px-6 py-4 border-r font-normal text-stone-900 whitespace-nowrap dark:text-black">
+    <tr className="bg-stone-300 dark:bg-stone-300 border-y-2">
+      <th scope="row" class="px-6 py-4 border-r-2 font-normal text-stone-900 whitespace-nowrap dark:text-black text-center">
         {namaMenu}
       </th>
-      <td className="px-6 py-4 border-r text-stone-900">{kategori}</td>
-      <td className="px-6 py-4 border-r text-stone-900">{harga}</td>
-      <td className="px-6 py-4 border-r text-stone-900">
+      <td className="px-6 py-4 border-r-2 text-stone-900 text-center">{kategori}</td>
+      <td className="px-6 py-4 border-r-2 text-stone-900 text-center">{harga}</td>
+      <td className="px-6 py-4 border-r-2 text-stone-900">
         <img src={image} alt="gambar" style={{ maxWidth: "150px", maxHeight: "150px" }} />
         {}
       </td>
