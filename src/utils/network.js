@@ -1,5 +1,5 @@
-// const BASE_URL = "http://103.127.97.117:4004";
-const BASE_URL = "http://localhost:4004";
+const BASE_URL = "http://103.127.97.117:4004";
+// const BASE_URL = "http://localhost:4004";
 
 function getAccessToken() {
   return localStorage.getItem("accessToken");
@@ -76,6 +76,24 @@ async function register({ username, email, password, nama, telepon, alamat, isSe
 }
 
 //CRUD Menu
+async function addMenu({ namaMenu, kategori, harga, image }) {
+  const response = await fetchWithToken(`${BASE_URL}/menu/addMenu`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ namaMenu, kategori, harga, image }),
+  });
+
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
+}
+
 async function getMenu() {
   const response = await fetchWithToken(`${BASE_URL}/menu`);
   const responseJson = await response.json();
@@ -111,6 +129,7 @@ export {
   getRoleUser,
   putRoleUser,
   deleteRoleUser,
+  addMenu,
   getMenu,
   deleteMenu,
 };

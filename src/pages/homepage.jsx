@@ -3,19 +3,19 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Menu from "../components/Menu";
 import EditForm from "../components/EditForm";
 import Sidebar from "../components/Sidebar";
-import { getProduct, handleDeleteProduct } from "../utils/local";
+import { getMenu, handleDeleteMenu } from "../utils/local";
 import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
 
 function Home() {
-  const [product, setProduct] = useState([]);
+  const [menu, setMenu] = useState([]);
   const [search, setSearch] = useState("");
   const [isFormEdit, setIsFormEdit] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const data = getProduct();
-    setProduct(data);
+    const data = getMenu();
+    setMenu(data);
   }, []);
 
   const onHandleSearch = (event) => {
@@ -30,12 +30,13 @@ function Home() {
     setIsModalOpen(false);
   };
 
+  
   const onDeleteHandler = (menuId) => {
-    handleDeleteProduct(menuId);
-    setProduct(getProduct());
+    handleDeleteMenu(menuId);
+    setMenu(getMenu());
     // setIsModalOpen(true);
   };
-
+    
   const openFormEdit = () => {
     setIsFormEdit(true);
   };
@@ -44,11 +45,11 @@ function Home() {
     setIsFormEdit(false);
   };
 
-  const filteredProduct = product.filter((item) => {
+  const filteredMenu = menu.filter((item) => {
     const inputTextSearch = search.toLowerCase();
-    const searchProduct = item.menu.toLowerCase().includes(inputTextSearch) || item.category.toLowerCase().includes(inputTextSearch);
+    const searchMenu = item.namaMenu.toLowerCase().includes(inputTextSearch) || item.kategori.toLowerCase().includes(inputTextSearch);
 
-    return searchProduct;
+    return searchMenu;
   });
 
   return (
@@ -56,7 +57,7 @@ function Home() {
       <Header />
       <div className="flex bg-gray-100">
         <Sidebar />
-        <div className="container justify-center mx-5 pr-14 py-10 bg-grey-100">
+        <div className="container justify-center mx-5 pl-14 pr-14 py-10 bg-grey-100">
           <h1 className="text-2xl font-semibold text-left">Dashboard</h1>
           <form className="flex items-center pt-5">
             <div className="relative w-full">
@@ -77,7 +78,7 @@ function Home() {
 
           <div className="relative overflow-x-auto pt-10 w-full">
             <table className="w-full text-sm text-left rtl:text-right text-gray-50 dark:text-gray-50">
-              <thead className="text-xs text-stone-900 bg-stone-400 dark:bg-stone-400 dark:text-stone-900">
+              <thead className="text-xs text-stone-900 bg-orange-400 dark:bg-stone-400 dark:text-stone-900">
                 <tr>
                   <th scope="col" className="px-6 py-3 border-r text-center">
                     Menu
@@ -97,17 +98,17 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                {filteredProduct.map((item, id) => (
+                {filteredMenu.map((item, id) => (
                   <Menu
                     key={id}
                     id={item.id}
-                    menu={item.menu}
-                    category={item.category}
-                    price={item.price}
-                    img={item.img}
+                    menu={item.namaMenu}
+                    category={item.kategori}
+                    price={item.harga}
+                    img={item.image}
                     editbutton="Edit"
                     deletebutton="Delete"
-                    onDelete={() => onDeleteHandler(item.id)}
+                    onDelete={onDeleteHandler}
                     onEdit={openFormEdit}
                   />
                 ))}

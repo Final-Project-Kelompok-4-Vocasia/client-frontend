@@ -2,23 +2,29 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import toast from "react-hot-toast";
-import { addProduct } from "../utils/local";
+import { addMenu } from "../utils/network";
 
-function AddProduct() {
-  const [product, setProduct] = useState({
-    menu: "",
-    category: "",
-    price: "",
-    img: "",
+function AddMenu() {
+  const [menu, setMenu] = useState({
+    namaMenu: "",
+    kategori: "",
+    harga: "",
+    image: "",
   });
+  
+  async function onSubmitHandler(event) {
+    event.preventDefault();
+    const addedNewMenu = await addMenu(menu);
+    console.log(addedNewMenu);
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    addProduct(product);
-    console.log("Data added successfully!");
-    toast.success("Data added successfully!");
-  };
-
+    if (addedNewMenu) {
+      toast.success("Data added successfully!");
+    } else {
+      toast.error("Failed to add menu!");
+      console.log(`Error: ${addedNewMenu.error}`);
+    }
+  }
+  
   return (
     <div>
       <Header />
@@ -37,8 +43,8 @@ function AddProduct() {
                 id="menu"
                 placeholder="Product Name"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.menu}
-                onChange={(e) => setProduct({ ...product, menu: e.target.value })}
+                value={menu.namaMenu}
+                onChange={(e) => setMenu({ ...menu, namaMenu: e.target.value })}
               />
             </div>
             <div className="mb-5">
@@ -49,8 +55,8 @@ function AddProduct() {
                 name="category"
                 id="category"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.category}
-                onChange={(e) => setProduct({ ...product, category: e.target.value })}>
+                value={menu.kategori}
+                onChange={(e) => setMenu({ ...menu, kategori: e.target.value })}>
                 <option value="" disabled defaultValue>
                   Select a Category
                 </option>
@@ -68,8 +74,8 @@ function AddProduct() {
                 id="price"
                 placeholder="Enter Price (Rp.)"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.price}
-                onChange={(e) => setProduct({ ...product, price: e.target.value })}
+                value={menu.harga}
+                onChange={(e) => setMenu({ ...menu, harga: e.target.value })}
               />
             </div>
             <div className="mb-5">
@@ -82,8 +88,8 @@ function AddProduct() {
                 id="imgURL"
                 placeholder="Enter Img URL"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.img}
-                onChange={(e) => setProduct({ ...product, img: e.target.value })}
+                value={menu.image}
+                onChange={(e) => setMenu({ ...menu, image: e.target.value })}
               />
             </div>
             <div></div>
@@ -100,4 +106,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default AddMenu;
