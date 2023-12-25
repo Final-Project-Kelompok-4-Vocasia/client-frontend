@@ -3,15 +3,17 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import toast from "react-hot-toast";
 import { addMenu } from "../utils/network";
+import { useNavigate } from "react-router";
 
 function AddMenu() {
+  const navigate = useNavigate();
   const [menu, setMenu] = useState({
     namaMenu: "",
     kategori: "",
     harga: "",
     image: "",
   });
-  
+
   async function onSubmitHandler(event) {
     event.preventDefault();
     const addedNewMenu = await addMenu(menu);
@@ -19,19 +21,21 @@ function AddMenu() {
 
     if (addedNewMenu) {
       toast.success("Data added successfully!");
+      //Navigasi ke dashboard setelah menambahkan menu
+      navigate("/dashboard/seller");
     } else {
       toast.error("Failed to add menu!");
       console.log(`Error: ${addedNewMenu.error}`);
     }
   }
-  
+
   return (
     <div>
       <Header />
       <div className="flex bg-gray-100">
         <Sidebar />
         <div className="container ml-30 w-full h-full justify-center mx-20 pl-14 pr-14 py-10 bg-grey-100">
-          <h1 className="text-2xl text-center font-semibold">Add Product</h1>
+          <h1 className="text-2xl text-center font-semibold">Add Menu</h1>
           <form onSubmit={onSubmitHandler} className="max-w-lg mx-auto">
             <div className="pt-5 mb-5">
               <label htmlFor="menu" className="mb-2 block text-base font-medium text-[#07074D]">
@@ -41,7 +45,7 @@ function AddMenu() {
                 type="text"
                 name="menu"
                 id="menu"
-                placeholder="Product Name"
+                placeholder="Menu Name"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 value={menu.namaMenu}
                 onChange={(e) => setMenu({ ...menu, namaMenu: e.target.value })}
