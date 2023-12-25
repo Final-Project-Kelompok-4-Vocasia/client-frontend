@@ -120,7 +120,7 @@ function TableChart({ selectedMenus, onRemoveItem }) {
                 {rupiah(item.harga)}
               </td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {rupiah(item.subtotal)}
+                {rupiah(item.qty * item.harga)}
               </td>
               <td className="px-6 py-4">
                 <button
