@@ -62,7 +62,15 @@ async function register({ username, email, password, nama, telepon, alamat, isSe
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email, password, nama, noTelepon: telepon, alamat, isSeller }),
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+      nama,
+      noTelepon: telepon,
+      alamat,
+      isSeller,
+    }),
   });
 
   const responseJson = await response.json();
@@ -73,6 +81,18 @@ async function register({ username, email, password, nama, telepon, alamat, isSe
   }
 
   return { error: false, code: response.status };
+}
+
+//GET USERS
+async function getUserData() {
+  const response = await fetchWithToken(`${BASE_URL}/users`);
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
 }
 
 //CRUD Menu
@@ -96,6 +116,26 @@ async function addMenu({ namaMenu, kategori, harga, image }) {
 
 async function getMenu() {
   const response = await fetchWithToken(`${BASE_URL}/menu`);
+  const responseJson = await response.json();
+
+  console.log("Response:");
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson };
+}
+
+async function editMenu({ id, namaMenu, kategori, harga, image }) {
+  const response = await fetchWithToken(`${BASE_URL}/menu/updateMenu/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ namaMenu, kategori, harga, image }),
+  });
+
   const responseJson = await response.json();
 
   if (response.status >= 400) {
@@ -131,5 +171,7 @@ export {
   deleteRoleUser,
   addMenu,
   getMenu,
+  editMenu,
   deleteMenu,
+  getUserData,
 };
