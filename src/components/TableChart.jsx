@@ -1,61 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { loadSelectedMenusFromLocalStorage, saveData, saveToLocalStorage } from "../utils/localstorage";
+import {
+  loadSelectedMenusFromLocalStorage,
+  saveData,
+  saveToLocalStorage,
+} from "../utils/localstorage";
 import { menu } from "../utils/local";
-
 
 const rupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
-    currency: "IDR"
+    currency: "IDR",
   }).format(number);
 };
 
-function TableChart({ selectedMenus, onRemoveItem}) {
+function TableChart({ selectedMenus, onRemoveItem }) {
   const [selectedMenu, setSelectedmenu] = useState(selectedMenus); // Initialize with 1
-  let tempTotal = 0
-    const menus = menu.filter((item)=>{
-      let menus
-    for (let menu in selectedMenus){
-      if (item.namaMenu === menu) {
-        item.qty = selectedMenu[menu]
-        item.subtotal = item.harga * item.qty
-        tempTotal+= item.subtotal
-        menus =  item
-      }
-    }
-    return menus
-
-  })
+  let tempTotal = 0;
+  const menus = menu.filter((item) => {
+    // let menus;
+    selectedMenu.map((el) => el.id).includes(item.id);
+    // for (let menu in selectedMenus) {
+    //   console.log(menu, "INIMENUT");
+    //   if (item.namaMenu === menu) {
+    //     item.qty = selectedMenu[menu];
+    //     item.subtotal = item.harga * item.qty;
+    //     tempTotal += item.subtotal;
+    //     menus = item;
+    // }
+    // }
+    // return menus;
+  });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const invoice = 
-    {
-      id_order: new Date().getTime(),
-      create_at : new Date().toLocaleString(),
-      data_order : menus,
-      total_order : tempTotal,
-      status_order :  true
-    }
-  
+  const invoice = {
+    id_order: new Date().getTime(),
+    create_at: new Date().toLocaleString(),
+    data_order: menus,
+    total_order: tempTotal,
+    status_order: true,
+  };
 
-  const handleQuantityChange = (namaMenu, value) => {
-   
-    let menus = loadSelectedMenusFromLocalStorage()
-    menus[namaMenu] = value
-    saveToLocalStorage(menus)
-    setSelectedmenu(menus)
+  const handleQuantityChange = (id, value) => {
+    let array_chart = loadSelectedMenusFromLocalStorage();
+    const index = array_chart.map((el) => el.id).indexOf(id);
+    if (index !== -1) {
+      array_chart[index].qty = value;
+    }
+    saveToLocalStorage(array_chart);
+    setSelectedmenu(array_chart);
   };
 
   function handleRemoveItem(namaMenu) {
-    onRemoveItem(namaMenu)
+    onRemoveItem(namaMenu);
   }
 
-  
-
-  
   // Effect untuk memperbarui subtotal saat quantities berubah
   useEffect(() => {
-      saveData(invoice, "invoice")
+    saveData(invoice, "invoice");
   }, [tempTotal]);
 
   return (
@@ -84,10 +85,17 @@ function TableChart({ selectedMenus, onRemoveItem}) {
           </tr>
         </thead>
         <tbody>
-          {menus.map((item, index) => (
-            <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          {selectedMenu.map((item, index) => (
+            <tr
+              key={index}
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            >
               <td className="p-4">
-                <img src={item.gambar}  className="w-16 h-16 max-w-full max-h-full object-center" alt={item.namaMenu} />
+                <img
+                  src={item.image}
+                  className="w-16 h-16 max-w-full max-h-full object-center"
+                  alt={item.namaMenu}
+                />
               </td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 {item.namaMenu}
@@ -99,7 +107,9 @@ function TableChart({ selectedMenus, onRemoveItem}) {
                       type="number"
                       id={`quantity_${index}`}
                       value={item.qty}
-                      onChange={(e) => handleQuantityChange(item.namaMenu, parseInt(e.target.value))}
+                      onChange={(e) =>
+                        handleQuantityChange(item.id, parseInt(e.target.value))
+                      }
                       className="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       required
                     />
@@ -110,7 +120,7 @@ function TableChart({ selectedMenus, onRemoveItem}) {
                 {rupiah(item.harga)}
               </td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                { rupiah(item.subtotal) }
+                {rupiah(item.subtotal)}
               </td>
               <td className="px-6 py-4">
                 <button
@@ -127,13 +137,11 @@ function TableChart({ selectedMenus, onRemoveItem}) {
             <td colSpan="4" className="px-6 py-3 text-right">
               Total
             </td>
-            <td className="px-6 py-3">
-              {rupiah(tempTotal)}
-            </td>
+            <td className="px-6 py-3">{rupiah(tempTotal)}</td>
             <td className="px-6 py-3"></td>
           </tr>
         </tbody>
-      </table> 
+      </table>
     </div>
   );
 }

@@ -2,59 +2,64 @@
 
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { menu } from "../utils/local";
+// import { menu } from "../utils/local";
 import Card from "../components/Card";
-import { saveToLocalStorage, loadFromLocalStorage} from "../utils/localstorage";
+import {
+  saveToLocalStorage,
+  loadFromLocalStorage,
+  loadSelectedMenusFromLocalStorage,
+} from "../utils/localstorage";
 import { getMenu } from "../utils/api";
 
-
 function DashboardBuyer() {
-  const [order, setOrder] = useState({});
-  // const [orderAPI, setOrderAPI] = useState([]);
+  // const [order, setOrder] = useState({});
+  const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    setOrder(loadFromLocalStorage("menus") || {});
-    // // setOrderAPI(loadFromLocalStorage("menusAPI") || []);
-    const fetchData = async()=> {
-      const {error,data} =await getMenu();
+    // setOrder(loadFromLocalStorage("menus") || {});
+    // // setMenu(loadFromLocalStorage("menusAPI") || []);
+    const fetchData = async () => {
+      const { error, data } = await getMenu();
 
       if (error) {
         alert("Error mengambil data dari database!");
         console.log(`Error: ${error}`);
       } else {
-        // setOrderAPI(data);
-       console.log(data);
-
-      }   
+        setMenu(data);
+        //  console.log(data);
+      }
     };
 
-    fetchData()
+    fetchData();
   }, []);
 
- const handleOrder = (namaMenu)=>{
-    if (!order[namaMenu]) {
-      // eslint-disable-next-line no-template-curly-in-string
-      order[namaMenu] = 1
-      console.log("if")
-    }else{
-      order[namaMenu] += 1
-      console.log("else")
+  const handleOrder = (id) => {
+    let array_chart = loadSelectedMenusFromLocalStorage();
+    const menu_pilihan = menu.find((el) => el.id == id);
+    if (Array.isArray(array_chart)) {
+      const index = array_chart.map((el) => el.id).indexOf(id);
+      if (index !== -1) {
+        array_chart[index].qty++;
+      } else {
+        array_chart.push({ ...menu_pilihan, qty: 1 });
+      }
+    } else {
+      array_chart = [{ ...menu_pilihan, qty: 1 }];
     }
-  saveToLocalStorage(order);
- }
+    saveToLocalStorage(array_chart);
+  };
 
-//  const handleOrderAPI = (namaMenu)=>{
-//   if (!orderAPI[namaMenu]) {
-//     // eslint-disable-next-line no-template-curly-in-string
-//     orderAPI[namaMenu] = 1
-//     console.log("ifAPI")
-//   }else{
-//     orderAPI[namaMenu] += 1
-//     console.log("elseAPI")
-//   }
-// // saveToLocalStorage(orderAPI);
-// }
- 
+  //  const handleOrderAPI = (namaMenu)=>{
+  //   if (!orderAPI[namaMenu]) {
+  //     // eslint-disable-next-line no-template-curly-in-string
+  //     orderAPI[namaMenu] = 1
+  //     console.log("ifAPI")
+  //   }else{
+  //     orderAPI[namaMenu] += 1
+  //     console.log("elseAPI")
+  //   }
+  // // saveToLocalStorage(orderAPI);
+  // }
 
   return (
     <div>
@@ -77,7 +82,6 @@ function DashboardBuyer() {
           ))}
       </div> */}
 
-
       <h1 className="mt-2 mb-2 text-3xl font-bold text-orange-800">Minuman</h1>
       <div className="flex flex-wrap justify-center space-x-4 mb-8">
         {menu
@@ -95,7 +99,6 @@ function DashboardBuyer() {
             <Card menuData={menuData} onClickItem={handleOrderAPI}></Card>
           ))}
       </div> */}
-
     </div>
   );
 }
