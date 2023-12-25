@@ -56,15 +56,7 @@ async function login({ email, password }) {
   return { error: false, code: response.status, data: responseJson.data };
 }
 
-async function register({
-  username,
-  email,
-  password,
-  nama,
-  telepon,
-  alamat,
-  isSeller,
-}) {
+async function register({ username, email, password, nama, telepon, alamat, isSeller }) {
   const response = await fetch(`${BASE_URL}/register`, {
     method: "POST",
     headers: {
@@ -108,11 +100,31 @@ async function getMenu() {
   const response = await fetchWithToken(`${BASE_URL}/menu`);
   const responseJson = await response.json();
 
+  console.log("Response:");
+
   if (response.status >= 400) {
     return { error: true, code: response.status, data: null };
   }
 
   return { error: false, code: response.status, data: responseJson };
+}
+
+async function editMenu({ id, namaMenu, kategori, harga, image }) {
+  const response = await fetchWithToken(`${BASE_URL}/menu/updateMenu/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ namaMenu, kategori, harga, image }),
+  });
+
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
 }
 
 async function deleteMenu(id) {
@@ -140,6 +152,7 @@ export {
   putRoleUser,
   deleteRoleUser,
   getMenu,
+  editMenu,
   deleteMenu,
   getUserData,
 };

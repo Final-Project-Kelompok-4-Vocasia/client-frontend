@@ -3,42 +3,24 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Menu from "../components/Menu";
 import EditForm from "../components/EditForm";
 import Sidebar from "../components/Sidebar";
-// import { getProduct, handleDeleteProduct } from "../utils/local";
-import AlertModal from "../components/Alerts";
+// import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
-import { deleteMenu, getMenu } from "../utils/network";
+import { deleteMenu, getMenu, editMenu } from "../utils/network";
 
 function Home() {
   const [menu, setMenu] = useState([]);
   const [search, setSearch] = useState("");
   const [isFormEdit, setIsFormEdit] = useState(false);
   const [detail, setDetail] = useState({});
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // useEffect(() => {
-  //   const data = getProduct();
-  //   console.log("Test 1", data);
-  //   setMenu(data);
-  //   console.log("Test 2", menu);
-  // }, []);
 
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  // };
-
-  // const onDeleteHandler = (menuId) => {
-  //   handleDeleteProduct(menuId);
-  //   setProduct(getProduct());
-  //   // setIsModalOpen(true);
-  // };
+  const onHandleEditMenu = (id, updatedData) => {
+    //Set data array menu seteah datanya di edit
+    setMenu((prevMenus) => prevMenus.map((menu) => (menu.id === id ? { ...menu, ...updatedData } : menu)));
+  };
 
   const onHandleDeleteMenu = async (id) => {
     try {
@@ -48,12 +30,13 @@ function Home() {
         alert("Error menghapus menu!");
         console.error("Error menghapus menu:", error.code);
       } else {
-        const updateMenu = await getMenu();
+        const updatedMenu = await getMenu();
 
-        if (!updateMenu.error) {
-          setMenu(updateMenu.data);
+        if (!updatedMenu.error) {
+          //Update list menu setelah datanya dihapus
+          setMenu(updatedMenu.data.data);
         } else {
-          console.log("Error mengupdate menu:", updateMenu.code);
+          console.log("Error mengupdate menu:", updatedMenu.code);
         }
       }
     } catch (error) {
@@ -61,25 +44,12 @@ function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { error, data } = await getMenu();
-  //     if (error) {
-  //       alert("Error mengambil data dari database!");
-  //       console.log(`Error: ${error}`);
-  //     } else {
-  //       console.log("Data dari backend:", data);
-  //       setMenu(data);
-  //       console.log("Test:", menu);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     getMenu()
       .then(({ data }) => {
-        setMenu(data);
+        console.log(data);
+        setMenu(data.data);
+        console.log(menu);
       })
       .catch((err) => {
         alert(JSON.stringify(err, null, 2));
@@ -99,8 +69,7 @@ function Home() {
   const filteredMenu = menu?.filter((item) => {
     const inputTextSearch = search.toLowerCase();
     const searchProduct =
-      (item.namaMenu &&
-        item.namaMenu.toLowerCase().includes(inputTextSearch)) ||
+      (item.namaMenu && item.namaMenu.toLowerCase().includes(inputTextSearch)) ||
       (item.kategori && item.kategori.toLowerCase().includes(inputTextSearch));
 
     return searchProduct;
@@ -125,7 +94,7 @@ function Home() {
                 }}
                 type="text"
                 className="bg-stone-300 text-stone-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-3 pl-10 dark:border-stone-200 "
-                placeholder="Search Product..."
+                placeholder="Search Menu..."
               />
             </div>
           </form>
@@ -165,26 +134,13 @@ function Home() {
                     onDelete={onHandleDeleteMenu}
                     onEdit={openFormEdit}
                   />
-
-                  // <Menu
-                  //   key={id}
-                  //   id={item.id}
-                  //   menu={item.namaMenu}
-                  //   category={item.kategori}
-                  //   price={item.harga}
-                  //   img={item.image}
-                  //   editbutton="Edit"
-                  //   deletebutton="Delete"
-                  //   onDelete={onHandleDeleteMenu}
-                  //   onEdit={openFormEdit}
-                  // />
                 ))}
               </tbody>
             </table>
           </div>
         </div>
 
-        {isFormEdit && <EditForm detail={detail} onClose={closeFormEdit} />}
+        {isFormEdit && <EditForm detail={detail} onClose={closeFormEdit} onEdit={onHandleEditMenu} />}
         {/* {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />} */}
       </div>
     </div>
