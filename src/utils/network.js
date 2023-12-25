@@ -75,6 +75,18 @@ async function register({ username, email, password, nama, telepon, alamat, isSe
   return { error: false, code: response.status };
 }
 
+//GET USERS
+async function getUserData() {
+  const response = await fetchWithToken(`${BASE_URL}/users`);
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
+}
+
 //CRUD Menu
 async function getMenu() {
   const response = await fetchWithToken(`${BASE_URL}/menu`);
@@ -113,4 +125,5 @@ export {
   deleteRoleUser,
   getMenu,
   deleteMenu,
+  getUserData,
 };

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3bf1fef8-dfad-46a5-a123-87bed8d59943",
+		"_postman_id": "1fa4497b-8bc1-47fa-a9ab-714c631539fe",
 		"name": "Final Project - Kelompok 4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30194791"
+		"_exporter_id": "30535950"
 	},
 	"item": [
 		{
@@ -52,6 +52,40 @@
 						"method": "POST",
 						"header": [],
 						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@email.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
@@ -67,17 +101,130 @@
 							]
 						},
 						"url": {
-							"raw": "http://103.127.97.117:4004/login",
+							"raw": "http://localhost:4004/profile",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
-								"login"
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "vocasia123",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "alamat",
+									"value": "Jember, Jawa Timur",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4004/profile/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"profile",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "vocasia123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4004/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Usere",
+					"request": {
+						"auth": {
+							"type": "inherit"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4004/users/delete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"users",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "string"
+								}
 							]
 						}
 					},
@@ -96,7 +243,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDIxNzcwMjl9.8IrNLu0M-rZKSGfr6LdtCtGUn4nD47NLIkCQIr1vC2I",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDI5OTIwMDl9.Omjw-oSGbKimP8aQREYJN1sOsicJJ_5r2_VrcG8dCFg",
 									"type": "string"
 								}
 							]
@@ -113,17 +260,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.127.97.117:4004/menu",
+							"raw": "http://localhost:4004/menu/addMenu",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
-								"menu"
+								"menu",
+								"addMenu"
 							]
 						}
 					},
@@ -135,13 +280,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://103.127.97.117:4004/menu",
+							"raw": "http://localhost:4004/menu",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
@@ -167,22 +309,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://103.127.97.117:4004/:id",
+							"raw": "http://localhost:4004/menu/:id",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
+								"menu",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -197,7 +337,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJjYWh5bzIwMjNAZW1haWwuY29tIiwiaWF0IjoxNjk5NzgwOTMzfQ.FuIE57caJvZzeMd6URQiMAo7cG55pEsvUoh-YCRc3OU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDI5OTIwMDl9.Omjw-oSGbKimP8aQREYJN1sOsicJJ_5r2_VrcG8dCFg",
 									"type": "string"
 								}
 							]
@@ -214,23 +354,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.127.97.117:4004/menu/:id",
+							"raw": "http://localhost:4004/menu/updateMenu/:id",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
 								"menu",
+								"updateMenu",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "2"
 								}
 							]
 						}
@@ -245,7 +383,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiaW1vY2hheW9AZ21haWwuY29tIiwiaWF0IjoxNjk5ODY4MzY1fQ.WUL-reFm1lcH1v0sc0rl-lfEiIAdQW-NX0nvI2tkQdo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDI5OTIwMDl9.Omjw-oSGbKimP8aQREYJN1sOsicJJ_5r2_VrcG8dCFg",
 									"type": "string"
 								}
 							]
@@ -253,17 +391,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://103.127.97.117:4004/menu/:id",
+							"raw": "http://localhost:4004/menu/deleteMenu/:id",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
 								"menu",
+								"deleteMenu",
 								":id"
 							],
 							"variable": [
@@ -282,193 +418,48 @@
 			"name": "Order",
 			"item": [
 				{
-					"name": "POST Create Order",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJjYWh5bzIwMjRAZW1haWwuY29tIiwiaWF0IjoxNjk5ODY4MTMwfQ.0oc5Km5SyQb3pH8dzDp7xW9LKw2OVkBhvW_EHJDxx3A",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"totalHarga\": 500,\n   \"status\": \"Dipesan\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://103.127.97.117:4004/order",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"order"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GET Order List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDMxNzQyNDJ9.Sf2BMiT19YFY2GrAXZyKHhxdUK_KpW03yihnIGfv-Tw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/order",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"order"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Order By ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/order/id",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"order",
-								"id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT Update Order",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"totalHarga\": 500,\n   \"status\": \"Selesai\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "vocasia123",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://103.127.97.117:4004/order/:id",
+							"raw": "http://localhost:4004/order/history",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
 								"order",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Order by ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/order/:id",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"order",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"history"
 							]
 						}
 					},
@@ -487,7 +478,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJjYWh5bzIwMjRAZW1haWwuY29tIiwiaWF0IjoxNjk5ODY4MTMwfQ.0oc5Km5SyQb3pH8dzDp7xW9LKw2OVkBhvW_EHJDxx3A",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoibmFzZWhAZ21haWwuY29tIiwiaWF0IjoxNzAzMTgwNTYwfQ.YAV34inYi6bpLkYYbqDLutUXqr6pewxvLnrf4W25m9E",
 									"type": "string"
 								}
 							]
@@ -496,7 +487,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"orderID\": 1,\n   \"menuID\": 1,\n   \"quantity\": 5,\n   \"harga\": 19000\n}",
+							"raw": "{\n   \"order\": [\n                    {\n                        \"menuID\": 2,\n                        \"quantity\": 2\n                    },\n                    {\n                        \"menuID\": 1,\n                        \"quantity\": 1\n                    }\n            ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -504,169 +495,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.127.97.117:4004/ordermenu",
+							"raw": "http://localhost:4004/ordermenu",
 							"protocol": "http",
 							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
+								"localhost"
 							],
 							"port": "4004",
 							"path": [
 								"ordermenu"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Order List",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/ordermenu",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"ordermenu"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Order By ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/ordermenu/id",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"ordermenu",
-								"id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT Update Order",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"orderID\": 1,\n   \"menuID\": 1,\n   \"quantity\": 10,\n   \"harga\": 19000\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://103.127.97.117:4004/ordermenu/:id",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"ordermenu",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Order by ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://103.127.97.117:4004/ordermenu/:id",
-							"protocol": "http",
-							"host": [
-								"103",
-								"127",
-								"97",
-								"117"
-							],
-							"port": "4004",
-							"path": [
-								"ordermenu",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
 							]
 						}
 					},
