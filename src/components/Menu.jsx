@@ -2,6 +2,7 @@ import React from "react";
 
 function Menu(props) {
   const {
+    id,
     namaMenu,
     kategori,
     harga,
@@ -9,6 +10,7 @@ function Menu(props) {
     editbutton,
     deletebutton,
     onDelete,
+    onEdit,
   } = props;
 
   return (
@@ -28,7 +30,7 @@ function Menu(props) {
       <td className="px-6 py-4 flex justify-center">
         <button
           className="font-medium text-blue-600 items-center dark:text-stone-900 hover:underline mx-2"
-          onClick={props.onEdit}
+          onClick={() => onEdit(id)}
         >
           {editbutton}
         </button>

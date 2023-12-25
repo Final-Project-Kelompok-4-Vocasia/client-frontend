@@ -12,6 +12,7 @@ function Home() {
   const [menu, setMenu] = useState([]);
   const [search, setSearch] = useState("");
   const [isFormEdit, setIsFormEdit] = useState(false);
+  const [detail, setDetail] = useState({});
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   // useEffect(() => {
@@ -85,7 +86,9 @@ function Home() {
       });
   }, []);
 
-  const openFormEdit = () => {
+  const openFormEdit = (id) => {
+    const cek = menu.find((el) => el.id == id);
+    setDetail(cek);
     setIsFormEdit(true);
   };
 
@@ -181,7 +184,7 @@ function Home() {
           </div>
         </div>
 
-        {isFormEdit && <EditForm onClose={closeFormEdit} />}
+        {isFormEdit && <EditForm detail={detail} onClose={closeFormEdit} />}
         {/* {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />} */}
       </div>
     </div>
