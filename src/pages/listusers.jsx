@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Sidebar from "../components/Sidebar";
 // import { getUsers, handleDeleteProduct } from "../utils/local";
-import { getUserData } from "../utils/network";
+import { getUserData, deleteUser } from "../utils/network";
 import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
 import Users from "../components/Users";
+import Swal from "sweetalert2";
 
 function Home() {
   const [users, setUsers] = useState([]);
@@ -25,6 +26,7 @@ function Home() {
     []);
 
 
+
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
   };
@@ -37,11 +39,46 @@ function Home() {
     setIsModalOpen(false);
   };
 
-  // const onDeleteHandler = (menu) => {
-  //   handleDeleteProduct(menu);
-  //   setProduct(getProduct());
-  //   setIsModalOpen(true);
-  // };
+  const onHandleDeleteUser = (id) => {
+    Swal.fire({
+      title: 'Apakah Anda Yakin?',
+      text: 'Data User Akan Dihapus',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Iya, Hapus Data!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { error } = await deleteUser(id);
+          if (error) {
+            Swal.fire('Error Menghapus User');
+            console.error('Error menghapus user:', error.code);
+          } else {
+            const updateUser = await getUserData();
+
+            if (!updateUser.error) {
+              setUsers(updateUser.data);
+              Swal.fire(
+                'Deleted!',
+                'Data User Berhasil Dihapus',
+                'success'
+              );
+
+            } else {
+              Swal.fire('Error Mengupdate User');
+              console.log('Error mengupdate User:', updateUser.error);
+            }
+          }
+        } catch (error) {
+          Swal.fire('Error Menghapus User');
+          console.error('Error menghapus User:', error);
+        }
+      }
+    });
+  };
+
 
   const filteredUser = Array.isArray(users)
     ? users.filter((user) => {
@@ -60,7 +97,7 @@ function Home() {
       <div className="flex bg-gray-100">
         <Sidebar />
         <div className="container justify-center mx-5 pl-30 pr-14 py-10 bg-grey-100">
-          <h1 className="text-2xl font-semibold text-left">List User</h1>
+          <h1 className="text-2xl font-semibold text-left">Daftar Akun Buyer</h1>
           <form className="flex items-center pt-5">
             <div className="relative w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -112,6 +149,7 @@ function Home() {
                     nomertelpon={user.noTelepon}
                     alamat={user.alamat}
                     deletebutton="Delete"
+                    onDelete={onHandleDeleteUser}
                   />
                 ))}
               </tbody>
