@@ -2,22 +2,32 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import toast from "react-hot-toast";
-import { addProduct } from "../utils/local";
+import { addMenu } from "../utils/network";
+import { useNavigate } from "react-router";
 
-function AddProduct() {
-  const [product, setProduct] = useState({
-    menu: "",
-    category: "",
-    price: "",
-    img: "",
+function AddMenu() {
+  const navigate = useNavigate();
+  const [menu, setMenu] = useState({
+    namaMenu: "",
+    kategori: "",
+    harga: "",
+    image: "",
   });
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    addProduct(product);
-    console.log("Data added successfully!");
-    toast.success("Data added successfully!");
-  };
+  async function onSubmitHandler(event) {
+    event.preventDefault();
+    const addedNewMenu = await addMenu(menu);
+    console.log(addedNewMenu);
+
+    if (addedNewMenu) {
+      toast.success("Data added successfully!");
+      //Navigasi ke dashboard setelah menambahkan menu
+      navigate("/dashboard/seller");
+    } else {
+      toast.error("Failed to add menu!");
+      console.log(`Error: ${addedNewMenu.error}`);
+    }
+  }
 
   return (
     <div>
@@ -25,7 +35,7 @@ function AddProduct() {
       <div className="flex bg-gray-100">
         <Sidebar />
         <div className="container ml-30 w-full h-full justify-center mx-20 pl-14 pr-14 py-10 bg-grey-100">
-          <h1 className="text-2xl text-center font-semibold">Add Product</h1>
+          <h1 className="text-2xl text-center font-semibold">Add Menu</h1>
           <form onSubmit={onSubmitHandler} className="max-w-lg mx-auto">
             <div className="pt-5 mb-5">
               <label htmlFor="menu" className="mb-2 block text-base font-medium text-[#07074D]">
@@ -35,10 +45,10 @@ function AddProduct() {
                 type="text"
                 name="menu"
                 id="menu"
-                placeholder="Product Name"
+                placeholder="Menu Name"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.menu}
-                onChange={(e) => setProduct({ ...product, menu: e.target.value })}
+                value={menu.namaMenu}
+                onChange={(e) => setMenu({ ...menu, namaMenu: e.target.value })}
               />
             </div>
             <div className="mb-5">
@@ -49,8 +59,8 @@ function AddProduct() {
                 name="category"
                 id="category"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.category}
-                onChange={(e) => setProduct({ ...product, category: e.target.value })}>
+                value={menu.kategori}
+                onChange={(e) => setMenu({ ...menu, kategori: e.target.value })}>
                 <option value="" disabled defaultValue>
                   Select a Category
                 </option>
@@ -68,8 +78,8 @@ function AddProduct() {
                 id="price"
                 placeholder="Enter Price (Rp.)"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.price}
-                onChange={(e) => setProduct({ ...product, price: e.target.value })}
+                value={menu.harga}
+                onChange={(e) => setMenu({ ...menu, harga: e.target.value })}
               />
             </div>
             <div className="mb-5">
@@ -82,8 +92,8 @@ function AddProduct() {
                 id="imgURL"
                 placeholder="Enter Img URL"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={product.img}
-                onChange={(e) => setProduct({ ...product, img: e.target.value })}
+                value={menu.image}
+                onChange={(e) => setMenu({ ...menu, image: e.target.value })}
               />
             </div>
             <div></div>
@@ -100,4 +110,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default AddMenu;

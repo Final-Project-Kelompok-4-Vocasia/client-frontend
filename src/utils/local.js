@@ -1,65 +1,65 @@
 //<-- product -->
-let array_product = [
+let array_menu = [
   {
     id: 1,
-    menu: "Matcha",
-    category: "Minuman",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Matcha",
+    kategori: "Minuman",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 2,
-    menu: "Roti",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Roti",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 3,
-    menu: "Kentang",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Kentang",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
-    menu: "Matcha",
-    category: "Minuman",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Matcha",
+    kategori: "Minuman",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
-    menu: "Roti",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Roti",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 4,
-    menu: "Kentang",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Kentang",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 5,
-    menu: "Matcha",
-    category: "Minuman",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Matcha",
+    kategori: "Minuman",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 6,
-    menu: "Roti",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Roti",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
   {
     id: 7,
-    menu: "Kentang",
-    category: "Makanan",
-    price: "Rp. 17.000",
-    img: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
+    namaMenu: "Kentang",
+    kategori: "Makanan",
+    harga: "Rp. 17.000",
+    image: "https://tse1.mm.bing.net/th?id=OIP.516jdHlRpTz0YC3gnWkd-QHaE8&pid=Api&P=0&h=180",
   },
 ];
 
@@ -171,17 +171,17 @@ let array_users = [
 
 //<--- function --->
 // ../utils/local
-function addProduct(newProduct) {
-  array_product = [...array_product, newProduct];
+function addMenu(newMenu) {
+  array_menu = [...array_menu, newMenu];
 }
 
-function getProduct() {
-  return array_product;
+function getMenu() {
+  return array_menu;
 }
 
 //Hapus array product berdasarkan IDnya
-function handleDeleteProduct(menuId) {
-  array_product = array_product.filter((item) => item.id !== menuId);
+function handleDeleteMenu(menuId) {
+  array_menu = array_menu.filter((item) => item.id !== menuId);
 }
 
 function getHistory() {
@@ -191,4 +191,4 @@ function getHistory() {
 function getUsers() {
   return array_users;
 }
-export { addProduct, getProduct, handleDeleteProduct, getHistory, getUsers };
+export { addMenu, getMenu, handleDeleteMenu, getHistory, getUsers };

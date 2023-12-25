@@ -3,12 +3,12 @@ import React from "react";
 const AlertModal = ({ onDelete, onCancel }) => {
   const handleCancel = (e) => {
     e.preventDefault();
-    onCancel(); // Menggunakan prop onCancel
+    onCancel(); 
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
-    onDelete(); // Menggunakan prop onDelete
+    onDelete(); 
   };
 
   return (
