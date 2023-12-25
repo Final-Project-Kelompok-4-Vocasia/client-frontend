@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Sidebar from "../components/Sidebar";
-import { getUsers, handleDeleteProduct } from "../utils/local";
+// import { getUsers, handleDeleteProduct } from "../utils/local";
+import { getUserData } from "../utils/network";
 import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
 import Users from "../components/Users";
@@ -12,9 +13,17 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const data = getUsers();
-    setUsers(data);
-  }, []);
+    getUserData().then((result) => {
+      const data = result.data;
+      console.log("Data BE", data);
+      setUsers(data);
+      console.log("Test User", users);
+    }).catch((error) => {
+      console.error("Error: ", error);
+    });
+  },
+    []);
+
 
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
@@ -34,12 +43,16 @@ function Home() {
   //   setIsModalOpen(true);
   // };
 
-  const filteredUser = users.filter((user) => {
-    const inputTextSearch = search.toLowerCase();
-    const searchUsers = user.username.toLowerCase().includes(inputTextSearch) || user.nama.toLowerCase().includes(inputTextSearch);
+  const filteredUser = Array.isArray(users)
+    ? users.filter((user) => {
+      const inputTextSearch = search.toLowerCase();
+      const searchUsers =
+        user.username.toLowerCase().includes(inputTextSearch) ||
+        user.nama.toLowerCase().includes(inputTextSearch);
 
-    return searchUsers;
-  });
+      return searchUsers;
+    })
+    : [];
 
   return (
     <div>
@@ -90,13 +103,13 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                {filteredUser.map((user) => (
+                {filteredUser.map((user, index) => (
                   <Users
-                    key={user.username}
+                    key={index}
                     username={user.username}
                     email={user.email}
                     nama={user.nama}
-                    nomertelpon={user.nomertelpon}
+                    nomertelpon={user.noTelepon}
                     alamat={user.alamat}
                     deletebutton="Delete"
                   />
