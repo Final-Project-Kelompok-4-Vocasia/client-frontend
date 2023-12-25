@@ -3,40 +3,62 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Menu from "../components/Menu";
 import EditForm from "../components/EditForm";
 import Sidebar from "../components/Sidebar";
-import { getProduct, handleDeleteProduct } from "../utils/local";
-import AlertModal from "../components/Alerts";
+// import AlertModal from "../components/Alerts";
 import Header from "../components/Header";
+import { deleteMenu, getMenu, editMenu } from "../utils/network";
 
 function Home() {
-  const [product, setProduct] = useState([]);
+  const [menu, setMenu] = useState([]);
   const [search, setSearch] = useState("");
   const [isFormEdit, setIsFormEdit] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const data = getProduct();
-    setProduct(data);
-  }, []);
+  const [detail, setDetail] = useState({});
 
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const onHandleEditMenu = (id, updatedData) => {
+    //Set data array menu seteah datanya di edit
+    setMenu((prevMenus) => prevMenus.map((menu) => (menu.id === id ? { ...menu, ...updatedData } : menu)));
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const onHandleDeleteMenu = async (id) => {
+    try {
+      const { error } = await deleteMenu(id);
+
+      if (error) {
+        alert("Error menghapus menu!");
+        console.error("Error menghapus menu:", error.code);
+      } else {
+        const updatedMenu = await getMenu();
+
+        if (!updatedMenu.error) {
+          //Update list menu setelah datanya dihapus
+          setMenu(updatedMenu.data.data);
+        } else {
+          console.log("Error mengupdate menu:", updatedMenu.code);
+        }
+      }
+    } catch (error) {
+      console.error("Error menghapus menu:", error);
+    }
   };
 
-  const onDeleteHandler = (menuId) => {
-    handleDeleteProduct(menuId);
-    setProduct(getProduct());
-    // setIsModalOpen(true);
-  };
+  useEffect(() => {
+    getMenu()
+      .then(({ data }) => {
+        console.log(data);
+        setMenu(data.data);
+        console.log(menu);
+      })
+      .catch((err) => {
+        alert(JSON.stringify(err, null, 2));
+      });
+  }, []);
 
-  const openFormEdit = () => {
+  const openFormEdit = (id) => {
+    const cek = menu.find((el) => el.id == id);
+    setDetail(cek);
     setIsFormEdit(true);
   };
 
@@ -44,9 +66,11 @@ function Home() {
     setIsFormEdit(false);
   };
 
-  const filteredProduct = product.filter((item) => {
+  const filteredMenu = menu?.filter((item) => {
     const inputTextSearch = search.toLowerCase();
-    const searchProduct = item.menu.toLowerCase().includes(inputTextSearch) || item.category.toLowerCase().includes(inputTextSearch);
+    const searchProduct =
+      (item.namaMenu && item.namaMenu.toLowerCase().includes(inputTextSearch)) ||
+      (item.kategori && item.kategori.toLowerCase().includes(inputTextSearch));
 
     return searchProduct;
   });
@@ -70,7 +94,7 @@ function Home() {
                 }}
                 type="text"
                 className="bg-stone-300 text-stone-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-3 pl-10 dark:border-stone-200 "
-                placeholder="Search Product..."
+                placeholder="Search Menu..."
               />
             </div>
           </form>
@@ -97,17 +121,17 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                {filteredProduct.map((item, id) => (
+                {filteredMenu?.map((item, index) => (
                   <Menu
-                    key={id}
+                    key={index}
                     id={item.id}
-                    menu={item.menu}
-                    category={item.category}
-                    price={item.price}
-                    img={item.img}
+                    namaMenu={item.namaMenu}
+                    kategori={item.kategori}
+                    harga={item.harga}
+                    image={item.image}
                     editbutton="Edit"
                     deletebutton="Delete"
-                    onDelete={() => onDeleteHandler(item.id)}
+                    onDelete={onHandleDeleteMenu}
                     onEdit={openFormEdit}
                   />
                 ))}
@@ -116,8 +140,8 @@ function Home() {
           </div>
         </div>
 
-        {isFormEdit && <EditForm onClose={closeFormEdit} />}
-        {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />}
+        {isFormEdit && <EditForm detail={detail} onClose={closeFormEdit} onEdit={onHandleEditMenu} />}
+        {/* {isModalOpen && <AlertModal isOpen={openModal} onCancel={handleCancel} onDelete={onDeleteHandler} />} */}
       </div>
     </div>
   );
