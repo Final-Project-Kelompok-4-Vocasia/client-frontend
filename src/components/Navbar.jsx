@@ -10,10 +10,7 @@ function Navbar () {
         <Link to="/OrderHistory" aria-current="page" class="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">History Order</Link>
     </li>
     <li class="me-2">
-        <Link to="/Makanan" class="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">Makanan</Link>
-    </li>
-    <li class="me-2">
-        <Link to="/Minuman" class="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">Minuman</Link>
+        <Link to="/dashboardBuyer" class="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">Menu</Link>
     </li>
     <li class="me-2">
         <Link to="/Chart" class="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">Chart</Link>
