@@ -1,0 +1,678 @@
+{
+	"info": {
+		"_postman_id": "3bf1fef8-dfad-46a5-a123-87bed8d59943",
+		"name": "Final Project - Kelompok 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30194791"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user\",\n    \"email\":\"user@email.com\",\n    \"password\": \"12345678\",\n    \"nama\": \"user\",\n    \"noTelepon\": \"081789562780\",\n    \"alamat\": \"Jawa Timur\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/register",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "vocasia123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/login",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "POST Create Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MDIxNzcwMjl9.8IrNLu0M-rZKSGfr6LdtCtGUn4nD47NLIkCQIr1vC2I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"namaMenu\": \"Coffe Late\",\n  \"kategori\": \"minuman\",\n  \"harga\": \"19000\",\n  \"image\": \"https://feelgoodfoodie.net/wp-content/uploads/2018/05/coconut-oil-coffee-9.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/menu",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Menu List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/menu",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Menu By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiaW1vY2hheW9AZ21haWwuY29tIiwiaWF0IjoxNjk5ODY4MzY1fQ.WUL-reFm1lcH1v0sc0rl-lfEiIAdQW-NX0nvI2tkQdo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Menu Update Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJjYWh5bzIwMjNAZW1haWwuY29tIiwiaWF0IjoxNjk5NzgwOTMzfQ.FuIE57caJvZzeMd6URQiMAo7cG55pEsvUoh-YCRc3OU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"namaMenu\": \"Coffe Late (Edit)\",\n  \"kategori\": \"minuman\",\n  \"harga\": \"19000\",\n  \"image\": \"https://feelgoodfoodie.net/wp-content/uploads/2018/05/coconut-oil-coffee-9.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/menu/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"menu",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Product by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiaW1vY2hheW9AZ21haWwuY29tIiwiaWF0IjoxNjk5ODY4MzY1fQ.WUL-reFm1lcH1v0sc0rl-lfEiIAdQW-NX0nvI2tkQdo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/menu/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"menu",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "POST Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJjYWh5bzIwMjRAZW1haWwuY29tIiwiaWF0IjoxNjk5ODY4MTMwfQ.0oc5Km5SyQb3pH8dzDp7xW9LKw2OVkBhvW_EHJDxx3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"totalHarga\": 500,\n   \"status\": \"Dipesan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/order",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Order List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/order",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Order By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/order/id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"order",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"totalHarga\": 500,\n   \"status\": \"Selesai\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/order/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Order by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/order/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderMenu",
+			"item": [
+				{
+					"name": "POST Create Order Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJjYWh5bzIwMjRAZW1haWwuY29tIiwiaWF0IjoxNjk5ODY4MTMwfQ.0oc5Km5SyQb3pH8dzDp7xW9LKw2OVkBhvW_EHJDxx3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"orderID\": 1,\n   \"menuID\": 1,\n   \"quantity\": 5,\n   \"harga\": 19000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/ordermenu",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"ordermenu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Order List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/ordermenu",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"ordermenu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Order By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNhMmM3OTA1MWFmYWIyNzBmNDA1ZiIsImlhdCI6MTcwMTUyODk2MywiZXhwIjoxNzAxNTMyNTYzfQ.IQBH421Tb3eSMsuf5eaQf9bD1_LqcmKk7LnQbfuaBDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/ordermenu/id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"ordermenu",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"orderID\": 1,\n   \"menuID\": 1,\n   \"quantity\": 10,\n   \"harga\": 19000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://103.127.97.117:4004/ordermenu/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"ordermenu",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Order by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2b2Nhc2lhQGVtYWlsLmNvbSIsImlhdCI6MTY5NzUyODM2M30.ciOlPjuhBoNGRmad98VOAYK4eUnwTPryphF9bfGd7-4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://103.127.97.117:4004/ordermenu/:id",
+							"protocol": "http",
+							"host": [
+								"103",
+								"127",
+								"97",
+								"117"
+							],
+							"port": "4004",
+							"path": [
+								"ordermenu",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
