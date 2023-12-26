@@ -39,8 +39,8 @@ function TableChart({ selectedMenus}) {
   const invoice =  {
     id_order: new Date().getTime(),
     create_at: new Date().toLocaleString(),
-    data_order: selectedMenu,
-    total_order: total,
+    OrderMenus: selectedMenu,
+    totalHarga: total,
     status_order: true,
   }
 

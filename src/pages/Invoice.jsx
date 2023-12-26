@@ -1,14 +1,26 @@
 import React, { useEffect} from "react";
 import BackButton from "../components/BackButton";
 import TableInvoice from "../components/TableInvoice";
-import { loadFromLocalStorage } from "../utils/localstorage";
+import { loadFromLocalStorage,loadDataLocalStorage } from "../utils/localstorage";
 import { useParams } from 'react-router';
-import { getHistoryOrder } from "../utils/api";
+import { getHistoryOrder, addOrder } from "../utils/api";
 const {data} = await getHistoryOrder()
 function historyOrder(id) {
   const invoiceDetail = data.filter((item)=> item.id == id) 
   return invoiceDetail[0]
 }
+
+async function Order() {
+  const menus = loadDataLocalStorage("menus")
+  const order = menus.map((menu)=> {return {
+    menuID: menu.id,
+    quantity: menu.qty
+  }})
+  
+  // const data = await addOrder({"order": order})
+  console.log(order)
+}
+
 
 
 
@@ -77,10 +89,14 @@ function Invoice() {
 
       <TableInvoice orderedMenus={id ? historyOrder(id) : orderedMenus} id={id}></TableInvoice>
       <div class="grid justify-items-center p-5">
-        {id ? "" :       <button 
+        {id ? "" : <div >
+        <button 
         type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start"
-        onClick={canceledOrder}>Canceled Order</button>
-}
+        onClick={Order}>Order</button> 
+        <button 
+        type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start"
+        onClick={canceledOrder}>Canceled Order</button> 
+          </div>}
       </div>
  
     </div>

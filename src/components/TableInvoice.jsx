@@ -4,8 +4,10 @@ function TableInvoice({ orderedMenus, id }) {
  console.log(orderedMenus)
   
     // Pengecekan jika orderedMenus kosong atau undefined
-    if (orderedMenus.OrderMenus.length === 0) {
-      return <p>No items to display.</p>;
+    if (id) {
+      if (orderedMenus.OrderMenus.length === 0) {
+        return <p>No items to display.</p>;
+      }
     }
 
   return (
@@ -37,7 +39,7 @@ function TableInvoice({ orderedMenus, id }) {
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.namaMenu || order.Menu.namaMenu}</td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty || order.quantity
 }</td>
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{ order.Menu.harga|| order.harga}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{ order.Menu?.harga|| order.harga}</td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.Menu ? order.harga : order.qty * order.harga}</td>
             </tr>
           ))}
