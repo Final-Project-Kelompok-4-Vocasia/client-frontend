@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import HistoryOrder from "../components/History Order";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import { getHistory } from "../utils/local";
+import { getHistoryOrder } from "../utils/network";
 
 function OrderHistory() {
   const date = new Date();
@@ -17,17 +17,23 @@ function OrderHistory() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const data = getHistory();
-    setHistory(data);
+    getHistoryOrder()
+      .then(({ data }) => {
+        console.log("Data Order BE: ", data);
+        setHistory(data);
+      })
+      .catch((err) => {
+        alert(JSON.stringify(err, null, 2));
+      });
   }, []);
 
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filteredHistory = history.filter((item) => {
+  const filteredHistory = history?.filter((item) => {
     const inputTextSearch = search.toLowerCase();
-    const searchHistory = item.menu.toLowerCase().includes(inputTextSearch) || item.status.toLowerCase().includes(inputTextSearch);
+    const searchHistory = item.nama.toLowerCase().includes(inputTextSearch) || item.status.toLowerCase().includes(inputTextSearch);
 
     return searchHistory;
   });
@@ -51,7 +57,7 @@ function OrderHistory() {
                 }}
                 type="text"
                 className="bg-stone-300 text-stone-900 text-sm rounded-lg focus:ring-stone-500 focus:border-stone-500 block w-full p-3 pl-10 dark:border-stone-200 "
-                placeholder="Search Order..."
+                placeholder="Search Order by status or name"
               />
             </div>
           </form>
@@ -64,19 +70,22 @@ function OrderHistory() {
                     Order ID
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
-                    Created At
+                    Tanggal Order
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
-                    Menu
+                    Status Pesanan
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
-                    Status
+                    Total Harga
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
-                    Quantity
+                    UserID
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
-                    Price
+                    Nama Buyer
+                  </th>
+                  <th scope="col" className="px-6 py-3 border-r text-center">
+                    Alamat
                   </th>
                 </tr>
               </thead>
@@ -84,12 +93,13 @@ function OrderHistory() {
                 {filteredHistory.map((item, index) => (
                   <HistoryOrder
                     key={index}
-                    orderId={item.orderId}
-                    createdAt={formattedUpdatedDate}
-                    menu={item.menu}
+                    orderId={item.id}
+                    createdAt={item.createdAt.slice(0, 10)}
                     status={item.status}
-                    quantity={item.quantity}
-                    price={item.price}
+                    totalHarga={item.totalHarga}
+                    userID={item.userID}
+                    nama={item.nama}
+                    alamat={item.alamat}
                   />
                 ))}
               </tbody>
