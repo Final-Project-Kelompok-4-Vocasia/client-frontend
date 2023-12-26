@@ -26,7 +26,7 @@ function DashboardBuyer() {
         console.log(`Error: ${error}`);
       } else {
         setMenu(data);
-         console.log(data);
+        //  console.log(data);
       }
     };
 
@@ -61,7 +61,7 @@ function DashboardBuyer() {
   // // saveToLocalStorage(orderAPI);
   // }
 
-  console.log(menu)
+  // console.log(menu)
 
   return (
     <div>

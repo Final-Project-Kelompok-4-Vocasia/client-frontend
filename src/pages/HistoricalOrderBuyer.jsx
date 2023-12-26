@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import TableHistoryOrder from "../components/HistoryOrderBuyer";
 import { loadFromLocalStorage } from "../utils/localstorage";
+import { getHistoryOrder } from "../utils/api";
+const {data} = await getHistoryOrder()
 
-function HistoricalOrderBuyer () {
-    const historyInvoice = loadFromLocalStorage('history').data || []
+function  HistoricalOrderBuyer() {
+    // const historyInvoice = loadFromLocalStorage('history').data || []
+   
+    // console.log(data)
 
     const navigate = useNavigate();
 
@@ -17,7 +21,7 @@ function HistoricalOrderBuyer () {
         <h1 class="text-5xl font-extrabold dark:text-white"><button 
     onClick={navigateHome}
     type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start">Red</button>Order History</h1>  
-        <TableHistoryOrder historyInvoice={historyInvoice}></TableHistoryOrder>
+        <TableHistoryOrder historyInvoice={data}></TableHistoryOrder>
         </div>
     );
 };

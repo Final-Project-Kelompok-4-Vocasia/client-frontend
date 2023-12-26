@@ -16,7 +16,10 @@ function Chart() {
   //   saveToLocalStorage(selectedMenus);
   //   setSelectedMenus(loadSelectedMenusFromLocalStorage());
   // };
-
+  const tsett = ()=>{
+    const menus = loadDataLocalStorage("menus")
+    return menus
+  }
   return (
     <div>
       <Navbar />
@@ -26,9 +29,7 @@ function Chart() {
           // onRemoveItem={handleRemoveItem}
         />
         <div class="grid justify-items-center p-5">
-          <Button evaa={()=>{
-            return loadDataLocalStorage("invoice")
-          }}>Order</Button>
+          <Button invoice={tsett}>Order</Button>
         </div>
       </div>
     </div>

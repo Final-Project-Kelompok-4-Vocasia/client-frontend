@@ -38,6 +38,37 @@ function getAccessToken() {
     }
   }
 
-  
+  async function addOrder(order) {
+    const response = await fetchWithToken(`${BASE_URL}/ordermenu`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    });
 
-  export { getAccessToken, putAccessToken, fetchWithToken, deleteAccessToken, getMenu };
+    const responseJson = await response.json();
+
+    if (response.status >= 400) {
+      return { error: true, code: response.status, data: null };
+    }
+  
+    return { error: false, code: response.status, data: responseJson };
+}
+
+async function getHistoryOrder(order) {
+    const response = await fetchWithToken(`${BASE_URL}/order/history`, {
+      method: "GET"
+    });
+
+    const responseJson = await response.json();
+   
+
+    if (response.status >= 400) {
+      return { error: true, code: response.status, data: null };
+    }
+  
+    return { error: false, code: response.status, data: responseJson };
+}
+
+  export { getAccessToken, putAccessToken, fetchWithToken, deleteAccessToken, getMenu, addOrder, getHistoryOrder };

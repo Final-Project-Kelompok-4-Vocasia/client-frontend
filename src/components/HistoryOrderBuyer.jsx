@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 function TableHistoryOrder({historyInvoice}){
-    
+    // console.log(historyInvoice)
 
         // const handleToSeeInvoice = (e, id_order) => {
         //     e.preventDefault();
@@ -51,16 +51,16 @@ function TableHistoryOrder({historyInvoice}){
             {historyInvoice.map((item, index)=>(
                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                     {item.create_at}
+                     {item.createdAt}
                  </th>
                  <td class="px-6 py-4">
-                     {index+1}
+                     {item.id}
                  </td>
                  <td class="px-6 py-4">
-                 {item.total_order}
+                 {item.totalHarga}
                  </td>
                  <td class="px-6 py-4">
-                 {item.status_order ? "Sudah Dipesan" : "Batal Dipesan"}
+                 {item.status}
                  </td>
                  <td class="px-6 py-4">
                      {/* <a href="/Invoice" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
