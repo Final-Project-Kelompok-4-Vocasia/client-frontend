@@ -31,7 +31,7 @@ function Login() {
         } else {
           toast.success("Selamat datang, Buyer!");
           // navigate("/dashboard/buyer"); //Route testing
-          navigate("/Makanan");
+          navigate("/dashboardBuyer");
         }
       } else {
         toast.error("Gagal: Salah Email/Password!");
