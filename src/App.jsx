@@ -10,8 +10,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Makanan from "./pages/Makanan";
-import Minuman from "./pages/Minuman";
+import DashboardBuyer from "./pages/DashboardBuyer";
 import Chart from "./pages/Chart";
 import Invoice from "./pages/Invoice";
 import HistoricalOrderBuyer from "./pages/HistoricalOrderBuyer";
@@ -64,10 +63,10 @@ function App() {
 
           <Route element={<IsAuthenticate />}>
             {/* Buyer */}
-            <Route path="/Makanan" element={<Makanan />} />
-            <Route path="/Minuman" element={<Minuman />} />
+            <Route path="/dashboardBuyer" element={<DashboardBuyer />} />
             <Route path="/Chart" element={<Chart />} />
             <Route path="/Invoice" element={<Invoice />} />
+            <Route path="/Invoice/:id" element={<Invoice />} />
             <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} />
 
             {/* Seller */}
