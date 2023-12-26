@@ -4,11 +4,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 // import { menu } from "../utils/local";
 import Card from "../components/Card";
-import {
-  saveToLocalStorage,
-  loadFromLocalStorage,
-  loadSelectedMenusFromLocalStorage,
-} from "../utils/localstorage";
+import { saveToLocalStorage, loadFromLocalStorage, loadSelectedMenusFromLocalStorage } from "../utils/localstorage";
 import { getMenu } from "../utils/api";
 
 function DashboardBuyer() {
@@ -26,7 +22,7 @@ function DashboardBuyer() {
         console.log(`Error: ${error}`);
       } else {
         setMenu(data);
-        //  console.log(data);
+        console.log(data);
       }
     };
 
@@ -61,14 +57,15 @@ function DashboardBuyer() {
   // // saveToLocalStorage(orderAPI);
   // }
 
-  // console.log(menu)
+  console.log(menu)
 
   return (
     <div>
       <Navbar />
-      <h1 className="mt-4 mb-2 text-3xl font-bold text-orange-800 ">Makanan</h1>
-      <div className="flex flex-wrap justify-center space-x-4 mb-8">
-        {menu.filter((item) => item.kategori === "makanan")
+      <h1 className="mt-4 mb-4 text-3xl font-bold text-orange-800 ">Makanan</h1>
+      <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-4">
+        {menu
+          .filter((item) => item.kategori === "makanan")
           .map((menuData) => (
             <Card menuData={menuData} onClickItem={handleOrder}></Card>
           ))}
@@ -83,8 +80,8 @@ function DashboardBuyer() {
           ))}
       </div> */}
 
-      <h1 className="mt-2 mb-2 text-3xl font-bold text-orange-800">Minuman</h1>
-      <div className="flex flex-wrap justify-center space-x-4 mb-8">
+      <h1 className="mt-2 mb-4 text-3xl font-bold text-orange-800">Minuman</h1>
+      <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-4">
         {menu
           .filter((item) => item.kategori === "minuman")
           .map((menuData) => (

@@ -75,19 +75,6 @@ function App() {
             <Route path="/add" element={<AddProduct />} />
             <Route path="/history" element={<OrderHistory />} />
           </Route>
-
-          {/* Buyer Page */}
-          {/* <Route path="/Makanan" element={<Makanan />} />
-          <Route path="/Minuman" element={<Minuman />} />
-          <Route path="/Chart" element={<Chart />} />
-          <Route path="/Invoice" element={<Invoice />} />
-          <Route path="/OrderHistory" element={<HistoricalOrderBuyer />} /> */}
-
-          {/* Seller Page */}
-          {/* <Route path="/dashboard/seller" element={<Home />} />
-          <Route path="/users" element={<ListUsers />} />
-          <Route path="/add" element={<AddProduct />} />
-          <Route path="/history" element={<OrderHistory />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
