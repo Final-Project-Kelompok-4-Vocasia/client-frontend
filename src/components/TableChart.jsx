@@ -66,7 +66,7 @@ function TableChart({ selectedMenus}) {
 
   // Effect untuk memperbarui subtotal saat quantities berubah
   useEffect(() => {
-    setTotal(a[0])
+    setTotal(tempTotal)
     saveData(invoice, "invoice");
   }, [tempTotal, invoice, selectedMenu]);
 

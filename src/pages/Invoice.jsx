@@ -11,14 +11,15 @@ function historyOrder(id) {
 }
 
 async function Order() {
-  const menus = loadDataLocalStorage("menus")
-  const order = menus.map((menu)=> {return {
+  const menus = loadDataLocalStorage("invoice")
+  // console.log(menus)
+  const order = menus.OrderMenus.map((menu)=> {return {
     menuID: menu.id,
     quantity: menu.qty
   }})
   
-  // const data = await addOrder({"order": order})
-  console.log(order)
+  const data = await addOrder({"order": order})
+  // console.log(data.message)
 }
 
 
