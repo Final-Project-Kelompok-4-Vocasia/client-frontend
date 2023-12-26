@@ -14,18 +14,17 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    getUserData().then((result) => {
-      const data = result.data;
-      console.log("Data BE", data);
-      setUsers(data);
-      console.log("Test User", users);
-    }).catch((error) => {
-      console.error("Error: ", error);
-    });
-  },
-    []);
-
-
+    getUserData()
+      .then((result) => {
+        const data = result.data;
+        console.log("Data User BE", data);
+        setUsers(data);
+        console.log("Test User", users);
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  }, []);
 
   const onHandleSearch = (event) => {
     setSearch(event.target.value);
@@ -42,55 +41,47 @@ function Home() {
   const onHandleDeleteUser = (id) => {
     console.log("INI ID I", id);
     Swal.fire({
-      title: 'Apakah Anda Yakin?',
-      text: 'Data User Akan Dihapus',
-      icon: 'warning',
+      title: "Apakah Anda Yakin?",
+      text: "Data User Akan Dihapus",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Iya, Hapus Data!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, Hapus Data!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const { error } = await deleteUser(id);
           console.log("INI ID II", id);
           if (error) {
-            Swal.fire('Error Menghapus User');
-            console.error('Error menghapus user:', error.code);
+            Swal.fire("Error Menghapus User");
+            console.error("Error menghapus user:", error.code);
           } else {
             const updateUser = await getUserData();
 
             if (!updateUser.error) {
               setUsers(updateUser.data);
-              Swal.fire(
-                'Deleted!',
-                'Data User Berhasil Dihapus',
-                'success'
-              );
-
+              Swal.fire("Deleted!", "Data User Berhasil Dihapus", "success");
             } else {
-              Swal.fire('Error Mengupdate User');
-              console.log('Error mengupdate User:', updateUser.error);
+              Swal.fire("Error Mengupdate User");
+              console.log("Error mengupdate User:", updateUser.error);
             }
           }
         } catch (error) {
-          Swal.fire('Error Menghapus User');
-          console.error('Error menghapus User:', error);
+          Swal.fire("Error Menghapus User");
+          console.error("Error menghapus User:", error);
         }
       }
     });
   };
 
-
   const filteredUser = Array.isArray(users)
     ? users.filter((user) => {
-      const inputTextSearch = search.toLowerCase();
-      const searchUsers =
-        user.username.toLowerCase().includes(inputTextSearch) ||
-        user.nama.toLowerCase().includes(inputTextSearch);
+        const inputTextSearch = search.toLowerCase();
+        const searchUsers = user.username.toLowerCase().includes(inputTextSearch) || user.nama.toLowerCase().includes(inputTextSearch);
 
-      return searchUsers;
-    })
+        return searchUsers;
+      })
     : [];
 
   return (

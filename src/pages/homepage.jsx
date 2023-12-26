@@ -47,7 +47,7 @@ function Home() {
   useEffect(() => {
     getMenu()
       .then(({ data }) => {
-        console.log(data);
+        console.log("Menu dari BE", data.data);
         setMenu(data.data);
         console.log(menu);
       })

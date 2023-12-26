@@ -40,7 +40,7 @@ const Sidebar = () => {
           <li className="w-48 hover:bg-orange-700 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out">
             <button className="flex items-center p-2 space-x-3 rounded-md" onClick={handleAdd}>
               <AiOutlineFile className="w-5 h-6 mr-2" />
-              <span>Add Product</span>
+              <span>Add Menu</span>
             </button>
           </li>
           <li className="w-48 hover:bg-orange-700 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out">
