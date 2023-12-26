@@ -99,7 +99,6 @@ async function getUserData() {
 async function deleteUser(id) {
   const response = await fetchWithToken(`${BASE_URL}/users/delete/${id}`, {
     method: "DELETE",
-
   });
 
   const responseJson = await response.json();
@@ -175,6 +174,26 @@ async function deleteMenu(id) {
   return { error: false, code: response.status, data: responseJson.data };
 }
 
+//Get History Order
+async function getHistoryOrder() {
+  const response = await fetchWithToken(`${BASE_URL}/order/history`);
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  //Tambah infromasi User ke kolom tabel
+  const orderWithUserInfo = responseJson.map((order) => ({
+    ...order,
+    userId: order.User.id,
+    nama: order.User.nama,
+    alamat: order.User.alamat,
+  }));
+
+  return { error: false, code: response.status, data: orderWithUserInfo };
+}
+
 export {
   getAccessToken,
   putAccessToken,
@@ -191,4 +210,5 @@ export {
   deleteMenu,
   getUserData,
   deleteUser,
+  getHistoryOrder,
 };
