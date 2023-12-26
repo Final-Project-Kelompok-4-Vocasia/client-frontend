@@ -69,19 +69,19 @@ function OrderHistory() {
                   <th scope="col" className="px-6 py-3 border-r text-center">
                     Order ID
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-10 py-3 border-r text-center">
                     Tanggal Order
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
                     Status Pesanan
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-8 py-3 border-r text-center">
                     Total Harga
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
                     UserID
                   </th>
-                  <th scope="col" className="px-6 py-3 border-r text-center">
+                  <th scope="col" className="px-10 py-3 border-r text-center">
                     Nama Buyer
                   </th>
                   <th scope="col" className="px-6 py-3 border-r text-center">
