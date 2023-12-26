@@ -10,17 +10,9 @@ function historyOrder(id) {
   return invoiceDetail[0]
 }
 
-async function Order() {
-  const menus = loadDataLocalStorage("invoice")
-  // console.log(menus)
-  const order = menus.OrderMenus.map((menu)=> {return {
-    menuID: menu.id,
-    quantity: menu.qty
-  }})
+// async function Order() {
   
-  const data = await addOrder({"order": order})
-  // console.log(data.message)
-}
+// }
 
 
 
@@ -89,16 +81,6 @@ function Invoice() {
       <h3>Tanggal Order: {id ? historyOrder(id).createdAt :formattedUpdatedDate } </h3>
 
       <TableInvoice orderedMenus={id ? historyOrder(id) : orderedMenus} id={id}></TableInvoice>
-      <div class="grid justify-items-center p-5">
-        {id ? "" : <div >
-        <button 
-        type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start"
-        onClick={Order}>Order</button> 
-        <button 
-        type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start"
-        onClick={canceledOrder}>Canceled Order</button> 
-          </div>}
-      </div>
  
     </div>
   );
