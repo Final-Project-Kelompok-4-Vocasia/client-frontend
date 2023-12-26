@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import { login, putAccessToken, putRoleUser } from "../utils/network";
+import { Label, TextInput } from "flowbite-react";
+import background from "../assets/bg-caffe.jpg";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
-function Login () {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,14 +26,15 @@ function Login () {
 
         //Routing Role untuk Seller dan Buyer
         if (response?.data?.isSeller) {
-          alert(`Selamat datang, Seller!`);
+          toast.success("Selamat datang, Seller!");
           navigate("/dashboard/seller"); //Route testing
         } else {
-          alert(`Selamat datang, Buyer!`);
-          navigate("/Makanan"); //Route testing
+          toast.success("Selamat datang, Buyer!");
+          // navigate("/dashboard/buyer"); //Route testing
+          navigate("/dashboardBuyer");
         }
       } else {
-        alert("Gagal: Salah Email/Password!");
+        toast.error("Gagal: Salah Email/Password!");
       }
     });
   }
@@ -39,46 +44,59 @@ function Login () {
     navigate("/register");
   }
 
-    return (
-        <div className=" my-16 flex items-center justify-center">
-        <form className="max-w-screen-lg w-6/12  rounded-lg border-solid border-4 border-orange-900 m-8 p-10" onSubmit={(event) => {
+  return (
+    <div>
+      <div
+        className="container min-h-screen flex justify-center"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}>
+        <form
+          onSubmit={(event) => {
             console.log("Berhasil disubmit!");
             onSubmitHandler(event);
-          }}>
-          <div className="mb-6">
-            <h1 className="mb-4 font-bold text-3xl">Login</h1>
-            <label htmlFor="email" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-              Email
-            </label>
-            <input
-            onChange={(event) => {
-            console.log(event.target.value);
-            const value = event.target.value;
-            setEmail(value);
-            }}
-              type="email"
-              id="email"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name@flowbite.com"
+          }}
+          className="bg-orange-200 shadow-lg rounded-lg flex w-full max-w-md h-fit px-8 py-6 flex-col gap-4 mt-14 border-white border-8">
+          <div className="rounded-md">
+            <h1 className="text-2xl font-bold text-center  text-slate-700 mb-7">Login User</h1>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Email:</Label>
+            </div>
+            <TextInput
+              onChange={(event) => {
+                console.log(event.target.value);
+                const value = event.target.value;
+                setEmail(value);
+              }}
+              type="text"
+              icon={FaUserCircle}
               required
+              shadow
             />
           </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
-            <input
-             onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setPassword(value);
-            }}
-              type="password"
-              id="password"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
+
+          <div>
+            <div className="mb-2 block">
+              <Label className="text-base text-slate-700">Password:</Label>
+            </div>
+            <div className="relative">
+              <TextInput
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  const value = event.target.value;
+                  setPassword(value);
+                }}
+                type="password"
+                icon={RiLockPasswordFill}
+                required
+                shadow
+              />
+            </div>
           </div>
+
+          {/* Submit Button */}
           {email && password ? (
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-lg">
               Submit
@@ -89,12 +107,17 @@ function Login () {
             </button>
           )}
 
-          <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Belum punya akun?&nbsp;
-          <Link to="/Register" onClick={onRegisterHandler} class="font-medium text-blue-600 hover:underline dark:text-blue-500">Register</Link>.
-          </p>
+          {/* Navigate Register */}
+          <div>
+            <Label className="text-sm">Belum punya akun?</Label>
+            <button onClick={onRegisterHandler} className="text-sm pl-1">
+              <u>Register</u>
+            </button>
+          </div>
         </form>
       </div>
-    );
-} 
+    </div>
+  );
+}
 
 export default Login;

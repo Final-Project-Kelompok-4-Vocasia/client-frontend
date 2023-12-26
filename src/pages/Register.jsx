@@ -1,6 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { register } from "../utils/network";
+import { useState } from "react";
+import { Label, TextInput } from "flowbite-react";
+import background from "../assets/bg-caffe.jpg";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
+import { GoHomeFill } from "react-icons/go";
+import { BiSolidContact } from "react-icons/bi";
+import { IoCall } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
+import { toast } from "react-hot-toast";
 
 function Register() {
   const navigate = useNavigate();
@@ -18,118 +27,166 @@ function Register() {
       console.log(response);
 
       if (!response.error) {
-        alert("Berhasil! Silahkan login");
+        toast.success("Berhasil! Silahkan login");
         console.log(`Berhasil membuat akun baru! email: ${email}, password: ${password} `);
-        navigate("/");
+        navigate("/login");
       } else {
-        alert("Gagal membuat akun!");
+        toast.error("Gagal membuat akun!");
       }
     });
   }
 
   const onLoginHandler = (event) => {
     event.preventDefault();
-    navigate("/");
+    navigate("/login");
   };
 
-    return (
-        <div className=" my-16 flex items-center justify-center">
-        <form className="max-w-screen-lg w-6/12  rounded-lg border-solid border-4 border-orange-900 m-8 p-10"
-            onSubmit={(event) => {
+  return (
+    <div>
+      <div
+        className="container min-h-screen flex justify-center bg-amber-100"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}>
+        <form
+          onSubmit={(event) => {
             console.log("Berhasil disubmit!");
             onSubmitHandler(event);
-          }}>
-          <div className="mb-6">
-            <h1 className="mb-4 font-bold text-3xl">Register</h1>
-            <label className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            <input
-                onChange={(event) => {
-                console.log(event.target.value);
-                const value = event.target.value;
-                setEmail(value);
-              }}
-              type="email"
-              id="email"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name@flowbite.com"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
-            <input
-            onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setPassword(value);
-            }}
-              type="password"
-              id="password"
-              className="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label for="username" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Username</label>
-            <input 
-             onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setUsername(value);
-            }}
-            type="text" 
-            id="username" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <div className="mb-6">
-            <label for="nama" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-            <input 
-             onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setNama(value);
-            }}
-            type="text" 
-            id="nama" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <div className="mb-6">
-            <label for="telepon" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">No.Telp</label>
-            <input
-             onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setTelepon(value);
-            }} 
-            type="tel" 
-            id="telepon" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <div className="mb-6">
-            <label for="address" className="flex items-center text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-            <input 
-             onChange={(event) => {
-              console.log(event.target.value);
-              const value = event.target.value;
-              setAlamat(value);
-            }}
-            type="text" 
-            id="address" 
-            class="bg-gray-50 border-b border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
-          </div>
-          <button
-            type="submit"
-            className="bg-orange-900 text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+          }}
+          className="bg-orange-200 shadow-lg rounded-lg flex w-fit h-fit px-8 py-6 flex-col gap-4 mt-14 border-white border-8">
+          <div>
+            <h1 className="text-2xl font-bold text-center text-slate-700 mb-7">Register User</h1>
 
-            onClick={onLoginHandler}
-          >
-            Submit
-          </button>
+            <div className="flex gap-4">
+              {/* Username */}
+              <div className="flex flex-row justify-between align-baseline gap-4">
+                <Label className="text-base text-slate-700">Username:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setUsername(value);
+                  }}
+                  type="text"
+                  icon={FaUserCircle}
+                  required
+                  shadow
+                />
+              </div>
+
+              {/* Email */}
+              <div className="flex flex-row justify-between align-baseline">
+                <Label className="text-base text-slate-700 mx-4">Email:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setEmail(value);
+                  }}
+                  type="text"
+                  icon={MdEmail}
+                  required
+                  shadow
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="flex gap-4">
+              {/* Password */}
+              <div className="flex flex-row justify-between align-baseline gap-4">
+                <Label className="text-base text-slate-700">Password:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setPassword(value);
+                  }}
+                  type="password"
+                  icon={RiLockPasswordFill}
+                  required
+                  shadow
+                />
+              </div>
+
+              {/* Nama */}
+              <div className="flex flex-row justify-between align-baseline">
+                <Label className="text-base text-slate-700 mx-4">Nama:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setNama(value);
+                  }}
+                  type="text"
+                  icon={BiSolidContact}
+                  required
+                  shadow
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="flex gap-4">
+              {/* Password */}
+              <div className="flex flex-row justify-between align-baseline gap-4">
+                <Label className="text-base text-slate-700">No Telepon:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setTelepon(value);
+                  }}
+                  type="text"
+                  icon={IoCall}
+                  required
+                  shadow
+                />
+              </div>
+
+              {/* Nama */}
+              <div className="flex flex-row justify-between align-baseline">
+                <Label className="text-base text-slate-700 mx-4">Alamat:</Label>
+                <TextInput
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    const value = event.target.value;
+                    setAlamat(value);
+                  }}
+                  type="text"
+                  icon={GoHomeFill}
+                  required
+                  shadow
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          {username && email && password && nama && telepon && alamat ? (
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-lg">
+              Submit
+            </button>
+          ) : (
+            <button type="submit" disabled className="bg-red-300 text-white font-semibold px-3 py-1.5 rounded-lg">
+              Submit
+            </button>
+          )}
+          <div>
+            {/* Navigate Login */}
+            <Label className="text-sm">Punya akun?</Label>
+            <button onClick={onLoginHandler} className="text-sm pl-1">
+              <u>Login</u>
+            </button>
+          </div>
         </form>
       </div>
-    );
-} 
+    </div>
+  );
+}
 
 export default Register;

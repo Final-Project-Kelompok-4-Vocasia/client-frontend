@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
 function BackButton({ id }) {
-    console.log(id);
-  
     const navigate = useNavigate();
   
     const navigateHome = (e) => {
       e.preventDefault();
       if (id) {
-        console.log("id ada:", id);
+        // console.log("id ada:", id);
         navigate("/OrderHistory");
       } else {
-        console.log("id gaada");
+        // console.log("id gaada");
         navigate("/Chart");
       }
     };

@@ -10,7 +10,7 @@ export const saveData = (data, key) => {
 
 export const loadFromLocalStorage = (key) => {
   const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : {};
+  return data ? JSON.parse(data) : [];
 };
 
 export const loadDataLocalStorage = (key) => {
@@ -23,7 +23,8 @@ export const saveSelectedMenusToLocalStorage = (data) => {
 };
 
 export const loadSelectedMenusFromLocalStorage = () => {
-  return loadFromLocalStorage(SELECTED_MENUS_KEY);
+  // const data = loadFromLocalStorage(SELECTED_MENUS_KEY)
+  return loadFromLocalStorage(SELECTED_MENUS_KEY)
 };
 
 

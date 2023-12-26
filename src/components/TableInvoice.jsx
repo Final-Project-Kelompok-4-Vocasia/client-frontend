@@ -1,6 +1,7 @@
 import React from "react";
 
 function TableInvoice({ orderedMenus }) {
+ console.log(orderedMenus)
   
     // Pengecekan jika orderedMenus kosong atau undefined
     if (orderedMenus.data_order.length === 0) {
@@ -35,7 +36,7 @@ function TableInvoice({ orderedMenus }) {
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.namaMenu}</td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty}</td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.harga}</td>
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.subtotal}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty * order.harga}</td>
             </tr>
           ))}
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

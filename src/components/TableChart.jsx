@@ -4,7 +4,7 @@ import {
   saveData,
   saveToLocalStorage,
 } from "../utils/localstorage";
-import { menu } from "../utils/local";
+// import { menu } from "../utils/local";
 
 const rupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -13,10 +13,14 @@ const rupiah = (number) => {
   }).format(number);
 };
 
-function TableChart({ selectedMenus, onRemoveItem }) {
-  const [selectedMenu, setSelectedmenu] = useState(selectedMenus); // Initialize with 1
+function TableChart({ selectedMenus}) {
+  // console.log(selectedMenu)
   let tempTotal = 0;
-  const menus = menu.filter((item) => {
+  const [selectedMenu, setSelectedmenu] = useState(selectedMenus); // Initialize with 1
+  const [total, setTotal] = useState(tempTotal)
+
+ 
+  const menus = selectedMenu.filter((item) => {
     // let menus;
     selectedMenu.map((el) => el.id).includes(item.id);
     // for (let menu in selectedMenus) {
@@ -32,32 +36,39 @@ function TableChart({ selectedMenus, onRemoveItem }) {
   });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const invoice = {
+  const invoice =  {
     id_order: new Date().getTime(),
     create_at: new Date().toLocaleString(),
-    data_order: menus,
-    total_order: tempTotal,
+    data_order: selectedMenu,
+    total_order: total,
     status_order: true,
-  };
+  }
 
+  let array_chart = loadSelectedMenusFromLocalStorage() ;
   const handleQuantityChange = (id, value) => {
-    let array_chart = loadSelectedMenusFromLocalStorage();
     const index = array_chart.map((el) => el.id).indexOf(id);
     if (index !== -1) {
       array_chart[index].qty = value;
     }
+    // array_chart.map((item)=>)
     saveToLocalStorage(array_chart);
     setSelectedmenu(array_chart);
   };
 
-  function handleRemoveItem(namaMenu) {
-    onRemoveItem(namaMenu);
+ 
+  const a = array_chart.map((item)=> tempTotal += item.harga * item.qty)
+  function handleRemoveItem(id) {
+    // console.log(id)
+    const newarray = array_chart.filter((menus)=> menus.id !== id)
+    saveToLocalStorage(newarray)
+    setSelectedmenu(newarray)
   }
 
   // Effect untuk memperbarui subtotal saat quantities berubah
   useEffect(() => {
+    setTotal(a[0])
     saveData(invoice, "invoice");
-  }, [tempTotal]);
+  }, [tempTotal, invoice, selectedMenu]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -124,7 +135,7 @@ function TableChart({ selectedMenus, onRemoveItem }) {
               </td>
               <td className="px-6 py-4">
                 <button
-                  onClick={() => handleRemoveItem(item.namaMenu)}
+                  onClick={() => handleRemoveItem(item.id)}
                   className="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >
                   Remove
