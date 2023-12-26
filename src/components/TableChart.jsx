@@ -50,12 +50,11 @@ function TableChart({ selectedMenus, onRemoveItem}) {
     onRemoveItem(namaMenu)
   }
 
+    
   
-
-  
-  // Effect untuk memperbarui subtotal saat quantities berubah
   useEffect(() => {
       saveData(invoice, "invoice")
+      
   }, [tempTotal]);
 
   return (

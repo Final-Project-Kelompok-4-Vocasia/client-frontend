@@ -37,6 +37,24 @@ function getAccessToken() {
       return { error: true, code: 500, data: null };
     }
   }
-  
 
-  export { getAccessToken, putAccessToken, fetchWithToken, deleteAccessToken, getMenu };
+  async function addOrder({ menuID, quantity, harga }) {
+    const response = await fetch(`${BASE_URL}/ordermenu`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ menuID, quantity, harga }),
+    });
+  
+    const responseJson = await response.json();
+  
+    if (response.status >= 400) {
+      alert(responseJson.msg);
+      return { error: true, code: response.status };
+    }
+  
+    return { error: false, code: response.status };
+  }
+
+  export { getAccessToken, putAccessToken, fetchWithToken, deleteAccessToken, getMenu, addOrder };

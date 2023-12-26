@@ -7,7 +7,21 @@ import {
 } from "../utils/localstorage";
 
 import Button from "../components/Button";
+import { addOrder } from "../utils/api";
 function Chart() {
+
+  async function onSubmitHandler(event) {
+    event.preventDefault();
+    const addedOrder = await addOrder();
+    console.log(addedOrder);
+
+    if (addedOrder) {
+      console.log("Berhasil menambahkan catatan baru!");
+    } else {
+      console.log(`Error: ${addOrder.error}`);
+    }
+  }
+
   const [selectedMenus, setSelectedMenus] = useState(loadSelectedMenusFromLocalStorage());
   // Fungsi untuk menghapus item dari selectedMenus
   const handleRemoveItem = (nama) => {
