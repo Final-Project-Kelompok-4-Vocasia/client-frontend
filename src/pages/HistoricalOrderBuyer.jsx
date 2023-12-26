@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import TableHistoryOrder from "../components/TableHistoryOrder";
+import TableHistoryOrder from "../components/HistoryOrderBuyer";
 import { loadFromLocalStorage } from "../utils/localstorage";
 
 function HistoricalOrderBuyer () {
