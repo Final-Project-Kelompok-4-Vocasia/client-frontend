@@ -3,16 +3,11 @@ import BackButton from "../components/BackButton";
 import TableInvoice from "../components/TableInvoice";
 import { loadFromLocalStorage } from "../utils/localstorage";
 import { useParams } from 'react-router';
-
-function historyOrder(order, history) {
-  if (history ===  null) {
-    // console.log("ksong")
-   localStorage.setItem('history', JSON.stringify({"data": [order]}));
-  }else{
-    const newhistory = JSON.parse(history);
-    newhistory.data.push(order);
-   localStorage.setItem('history', JSON.stringify(newhistory));
-  }
+import { getHistoryOrder } from "../utils/api";
+const {data} = await getHistoryOrder()
+function historyOrder(id) {
+  const invoiceDetail = data.filter((item)=> item.id == id) 
+  return invoiceDetail[0]
 }
 
 
@@ -50,22 +45,18 @@ function Invoice() {
   
 
   const { id } = useParams();
-  function invoiceDetail(id) {
-    const historyInvoice = localStorage.getItem("history");
-    const history = JSON.parse(historyInvoice);
-    const detailInvoice = history.data.find((history) => history.id_order == id);
-    return detailInvoice;
-  }
+  
+  // function invoiceDetail(id) {
+  //   const historyInvoice = localStorage.getItem("history");
+  //   const history = JSON.parse(historyInvoice);
+  //   const detailInvoice = history.data.find((history) => history.id_order == id);
+  //   return detailInvoice;
+  // }
 
   useEffect(()=>{
-    if (id == undefined){
-      historyOrder(orderedMenus, history)
-    } else {
-
-    }
   },[history, orderedMenus])
 
-  const name = "Eva";
+  // const name = "Eva";
   const tanggal_updated = new Date();
 
   const updatedYear = tanggal_updated.getFullYear();
@@ -81,14 +72,15 @@ function Invoice() {
           This is secondary text
         </small>
       </h1>
-      <h3>Name: {name} </h3>
-      <h3>Tanggal Order: {formattedUpdatedDate} </h3>
+      {/* <h3>Name: {name} </h3> */}
+      <h3>Tanggal Order: {id ? historyOrder(id).createdAt :formattedUpdatedDate } </h3>
 
-      <TableInvoice orderedMenus={id ? invoiceDetail(id) : orderedMenus}></TableInvoice>
+      <TableInvoice orderedMenus={id ? historyOrder(id) : orderedMenus} id={id}></TableInvoice>
       <div class="grid justify-items-center p-5">
-      <button 
+        {id ? "" :       <button 
         type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start"
         onClick={canceledOrder}>Canceled Order</button>
+}
       </div>
  
     </div>

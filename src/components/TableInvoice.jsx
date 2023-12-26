@@ -1,10 +1,10 @@
 import React from "react";
 
-function TableInvoice({ orderedMenus }) {
+function TableInvoice({ orderedMenus, id }) {
  console.log(orderedMenus)
   
     // Pengecekan jika orderedMenus kosong atau undefined
-    if (orderedMenus.data_order.length === 0) {
+    if (orderedMenus.OrderMenus.length === 0) {
       return <p>No items to display.</p>;
     }
 
@@ -28,15 +28,17 @@ function TableInvoice({ orderedMenus }) {
           </tr>
         </thead>
         <tbody>
-          {orderedMenus.data_order.map((order, index) => (
+          {orderedMenus.OrderMenus.map((order, index) => (
+           
             <tr
               key={index}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.namaMenu}</td>
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty}</td>
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.harga}</td>
-              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty * order.harga}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.namaMenu || order.Menu.namaMenu}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.qty || order.quantity
+}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{ order.Menu.harga|| order.harga}</td>
+              <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{order.Menu ? order.harga : order.qty * order.harga}</td>
             </tr>
           ))}
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -47,7 +49,7 @@ function TableInvoice({ orderedMenus }) {
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
               Total
             </td>
-            <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">Rp.{orderedMenus.total_order}</td>
+            <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">Rp.{orderedMenus.totalHarga}</td>
           </tr>
         </tbody>
       </table>

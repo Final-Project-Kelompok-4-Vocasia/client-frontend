@@ -68,7 +68,7 @@ function TableHistoryOrder({historyInvoice}){
                         e.preventDefault()
                         this.
                      }} >See</a> */}
-                     <Link to={`/Invoice/${item.id_order}`}>see</Link>
+                     <Link to={`/Invoice/${item.id}`}>see</Link>
                      {/* <Button> see </Button> */}
                  </td>
              </tr>
