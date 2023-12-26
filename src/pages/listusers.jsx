@@ -40,6 +40,7 @@ function Home() {
   };
 
   const onHandleDeleteUser = (id) => {
+    console.log("INI ID I", id);
     Swal.fire({
       title: 'Apakah Anda Yakin?',
       text: 'Data User Akan Dihapus',
@@ -52,6 +53,7 @@ function Home() {
       if (result.isConfirmed) {
         try {
           const { error } = await deleteUser(id);
+          console.log("INI ID II", id);
           if (error) {
             Swal.fire('Error Menghapus User');
             console.error('Error menghapus user:', error.code);
@@ -143,6 +145,7 @@ function Home() {
                 {filteredUser.map((user, index) => (
                   <Users
                     key={index}
+                    id={user.id}
                     username={user.username}
                     email={user.email}
                     nama={user.nama}
