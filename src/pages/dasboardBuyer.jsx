@@ -26,7 +26,7 @@ function DashboardBuyer() {
         console.log(`Error: ${error}`);
       } else {
         setMenu(data);
-        //  console.log(data);
+         console.log(data);
       }
     };
 
@@ -61,13 +61,14 @@ function DashboardBuyer() {
   // // saveToLocalStorage(orderAPI);
   // }
 
+  console.log(menu)
+
   return (
     <div>
       <Navbar />
       <h1 className="mt-4 mb-2 text-3xl font-bold text-orange-800 ">Makanan</h1>
       <div className="flex flex-wrap justify-center space-x-4 mb-8">
-        {menu
-          .filter((item) => item.kategori === "makanan")
+        {menu.filter((item) => item.kategori === "makanan")
           .map((menuData) => (
             <Card menuData={menuData} onClickItem={handleOrder}></Card>
           ))}
