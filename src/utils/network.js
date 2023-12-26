@@ -95,6 +95,22 @@ async function getUserData() {
   return { error: false, code: response.status, data: responseJson.data };
 }
 
+// DELETE USERS
+async function deleteUser(id) {
+  const response = await fetchWithToken(`${BASE_URL}/users/delete/${id}`, {
+    method: "DELETE",
+
+  });
+
+  const responseJson = await response.json();
+
+  if (response.status >= 400) {
+    return { error: true, code: response.status, data: null };
+  }
+
+  return { error: false, code: response.status, data: responseJson.data };
+}
+
 //CRUD Menu
 async function addMenu({ namaMenu, kategori, harga, image }) {
   const response = await fetchWithToken(`${BASE_URL}/menu/addMenu`, {
@@ -174,4 +190,5 @@ export {
   editMenu,
   deleteMenu,
   getUserData,
+  deleteUser,
 };
