@@ -4,6 +4,7 @@ import TableInvoice from "../components/TableInvoice";
 import { loadFromLocalStorage } from "../utils/localstorage";
 import { useParams } from "react-router";
 import { getHistoryOrderBuyer } from "../utils/network";
+import { Label } from "flowbite-react";
 
 function Invoice() {
   const { id } = useParams();
@@ -42,28 +43,11 @@ function Invoice() {
   const updatedDay = String(tanggal_updated.getDate()).padStart(2, "0");
   const formattedUpdatedDate = `${updatedDay}/${updatedMonth}/${updatedYear}`;
 
-  // return (
-  //   <div className="border-solid border-2 border-sky-500">
-  //     <h1 className="text-5xl font-extrabold dark:text-white p-10">
-  //       <BackButton id={id}></BackButton>
-  //       <small className="ms-2 font-semibold text-gray-700 dark:text-gray-400 text-center">Detail Pesanan Anda</small>
-  //     </h1>
-  //     {loading ? (
-  //       <p>Loading data...</p>
-  //     ) : (
-  //       <>
-  //         <h3>Tanggal Order: {id ? historyOrderFromDb?.createdAt : formattedUpdatedDate} </h3>
-  //         <TableInvoice orderedMenus={id ? historyOrder : orderedMenus} id={id}></TableInvoice>
-  //       </>
-  //     )}
-  //   </div>
-  // );
-
   return (
-    <div className="border-solid border-2 border-sky-500 text-center">
+    <div className="min-h-screen border-solid border-2 border-sky-500 text-center bg-orange-200">
       <h1 className="text-5xl font-extrabold dark:text-white p-10">
         <BackButton id={id}></BackButton>
-        <small className="ms-2 font-semibold text-gray-700 dark:text-gray-400">Detail Pesanan Anda</small>
+        <h2 className="ms-2 font-semibold text-gray-700 dark:text-gray-400">Detail Pesanan Anda</h2>
       </h1>
       {loading ? (
         <p>Loading data...</p>

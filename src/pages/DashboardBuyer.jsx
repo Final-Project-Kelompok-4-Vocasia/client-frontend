@@ -42,7 +42,7 @@ function DashboardBuyer() {
   return (
     <div>
       <Navbar />
-      <h1 className="mt-4 mb-4 text-3xl font-bold text-orange-800 text-center">Makanan</h1>
+      <h1 className="mt-9 mb-4 text-3xl font-bold text-slate-700 text-center">Makanan</h1>
       <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-4">
         {menu
           ?.filter((item) => item.kategori === "makanan")
@@ -51,7 +51,7 @@ function DashboardBuyer() {
           ))}
       </div>
 
-      <h1 className="mt-2 mb-4 text-3xl font-bold text-orange-800 text-center">Minuman</h1>
+      <h1 className="mt-14 mb-4 text-3xl font-bold text-slate-700 text-center">Minuman</h1>
       <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-4">
         {menu
           ?.filter((item) => item.kategori === "minuman")

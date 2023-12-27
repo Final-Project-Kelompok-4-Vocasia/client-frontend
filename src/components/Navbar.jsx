@@ -15,13 +15,13 @@ function Navbar() {
   };
 
   return (
-    <ul className=" flex flex-wrap justify-between text-sm font-medium text-center text-orange-800 border-b border-orange-800 dark:border-orange-800 dark:text-orange-800 ">
-      <h1 className="flex items-center text-4xl font-extrabold dark:text-white px-5">Caffe Web</h1>
+    <ul className="flex flex-wrap bg-orange-300 justify-between text-sm font-medium text-center text-orange-800 border-b-amber-900 border-orange-800 dark:border-orange-800 dark:text-orange-800 ">
+      <h1 className="flex items-center text-4xl font-extrabold text-orange-800 dark:text-white px-5">Caffe Web</h1>
       <div className="flex">
         <li className="me-2">
           <Link
             to="/dashboardBuyer"
-            className="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
+            className="inline-block text-base text-orange-900 p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
             Menu
           </Link>
         </li>
@@ -29,19 +29,21 @@ function Navbar() {
           <Link
             to="/order-history"
             aria-current="page"
-            className="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
+            className="inline-block text-base text-orange-900 p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
             History Order
           </Link>
         </li>
         <li className="me-2">
-          <Link to="/chart" className="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
+          <Link
+            to="/chart"
+            className="inline-block text-base text-orange-900 p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
             Chart
           </Link>
         </li>
-        <li className="me-2">
+        <li className="bg-slate-700">
           <Link
             onClick={handleLogout}
-            className="inline-block p-4 hover:text-white hover:bg-orange-800 dark:hover:bg-orange-800 dark:hover:text-orange-300">
+            className="inline-block text-base p-4 text-white hover:text-white dark:hover:bg-orange-800 dark:hover:text-orange-300">
             Logout
           </Link>
         </li>

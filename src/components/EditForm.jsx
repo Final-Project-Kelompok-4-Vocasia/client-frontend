@@ -44,8 +44,8 @@ const EditForm = ({ onClose, detail, onEdit }) => {
         <h2 className="text-2xl font-semibold mb-4 text-center">Edit Menu</h2>
         <form onSubmit={handleSubmit}>
           <form action="https://formbold.com/s/FORM_ID" method="POST">
-            <div class="mb-5">
-              <label for="name" class="mb-2 block text-base font-medium text-[#07074D]">
+            <div className="mb-5">
+              <label for="name" className="mb-2 block text-base font-medium text-[#07074D]">
                 Menu
               </label>
               <input
@@ -55,10 +55,10 @@ const EditForm = ({ onClose, detail, onEdit }) => {
                 placeholder="Product Name"
                 value={editedData.namaMenu}
                 onChange={(e) => setEditedData({ ...editedData, namaMenu: e.target.value })}
-                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div class="mb-5">
+            <div className="mb-5">
               <label htmlFor="category" className="mb-3 block text-base font-medium text-[#07074D]">
                 Category
               </label>
@@ -75,8 +75,8 @@ const EditForm = ({ onClose, detail, onEdit }) => {
                 <option value="makanan">Makanan</option>
               </select>
             </div>
-            <div class="mb-5">
-              <label for="subject" class="mb-3 block text-base font-medium text-[#07074D]">
+            <div className="mb-5">
+              <label for="subject" className="mb-3 block text-base font-medium text-[#07074D]">
                 Price
               </label>
               <input
@@ -86,11 +86,11 @@ const EditForm = ({ onClose, detail, onEdit }) => {
                 value={editedData.harga}
                 onChange={(e) => setEditedData({ ...editedData, harga: e.target.value })}
                 placeholder="Enter Price"
-                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div class="mb-5">
-              <label for="message" class="mb-3 block text-base font-medium text-[#07074D]">
+            <div className="mb-5">
+              <label for="message" className="mb-3 block text-base font-medium text-[#07074D]">
                 img URL
               </label>
               <input
@@ -100,10 +100,9 @@ const EditForm = ({ onClose, detail, onEdit }) => {
                 value={editedData.image}
                 onChange={(e) => setEditedData({ ...editedData, image: e.target.value })}
                 placeholder="Enter img URL"
-                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div></div>
           </form>
           <button
             type="submit"

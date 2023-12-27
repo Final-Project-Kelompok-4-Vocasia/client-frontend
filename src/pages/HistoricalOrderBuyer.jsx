@@ -29,14 +29,14 @@ function HistoricalOrderBuyer() {
   }, []);
 
   return (
-    <div class="p-5">
+    <div className="p-5 bg-orange-200 container min-h-screen">
       <button
         onClick={navigateHome}
         type="button"
-        class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start">
+        className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 grid justify-items-start">
         Kembali
       </button>
-      <h1 class="text-5xl font-extrabold dark:text-white text-center">Order History</h1>
+      <h1 className="text-5xl font-bold text-teal-700 dark:text-white text-center">Order History</h1>
       <TableHistoryOrder historyInvoice={history}></TableHistoryOrder>
     </div>
   );
